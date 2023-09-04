@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="750.0" prefWidth="1300.0" style="-fx-background-color: #f1f2f6;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.UniReserve.controller.Dashboard_form_controller">
+   <children>
+      <AnchorPane fx:id="MainPane" layoutX="265.0" layoutY="116.0" prefHeight="585.0" prefWidth="1000.0">
+         <children>
+            <AnchorPane fx:id="dashboardPane" layoutX="2.0" layoutY="2.0" prefHeight="585.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+               <effect>
+                  <DropShadow blurType="GAUSSIAN" height="43.98" radius="23.1575" spread="0.07" width="50.65">
+                     <color>
+                        <Color red="0.7372549176216125" green="0.7372549176216125" blue="0.7372549176216125" />
+                     </color>
+                  </DropShadow>
+               </effect>
+               <children>
+                  <Pane layoutX="31.0" layoutY="39.0" prefHeight="155.0" prefWidth="378.0" style="-fx-background-color: #74b9ff; -fx-background-radius: 30;">
+                     <children>
+                        <Text fill="#034f8a" layoutX="156.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Rooms">
+                           <font>
+                              <Font size="29.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblTotalRooms" fill="#034f8a" layoutX="156.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" wrappingWidth="174.05078229308128">
+                           <font>
+                              <Font size="69.0" />
+                           </font>
+                        </Text>
+                        <ImageView layoutX="31.0" layoutY="28.0">
+                           <image>
+                              <Image url="@../icons/hotel.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="31.0" layoutY="215.0" prefHeight="155.0" prefWidth="378.0" style="-fx-background-color: #74b9ff; -fx-background-radius: 30;">
+                     <children>
+                        <Text fill="#034f8a" layoutX="159.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available Rooms">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblTotalRooms1" fill="#034f8a" layoutX="159.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" wrappingWidth="174.05078229308128">
+                           <font>
+                              <Font size="69.0" />
+                           </font>
+                        </Text>
+                        <ImageView layoutX="26.0" layoutY="28.0">
+                           <image>
+                              <Image url="@../icons/available.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="484.0" layoutY="39.0" prefHeight="155.0" prefWidth="371.0" style="-fx-background-color: #74b9ff; -fx-background-radius: 30;">
+                     <children>
+                        <Text fill="#034f8a" layoutX="170.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Booked Rooms">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblTotalRooms11" fill="#034f8a" layoutX="166.0" layoutY="74.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" wrappingWidth="174.05078229308128">
+                           <font>
+                              <Font size="69.0" />
+                           </font>
+                        </Text>
+                        <ImageView layoutX="34.0" layoutY="28.0">
+                           <image>
+                              <Image url="@../icons/booked.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <AnchorPane layoutX="679.0" layoutY="370.0" prefHeight="177.0" prefWidth="285.0" style="-fx-background-color: white; -fx-background-radius: 20;">
+                     <effect>
+                        <DropShadow blurType="GAUSSIAN" color="#bcbcbc" height="23.97" radius="18.155" spread="0.07" width="50.65" />
+                     </effect>
+                     <children>
+                        <Text fx:id="txtTime" layoutX="32.0" layoutY="96.0" strokeType="OUTSIDE" strokeWidth="0.0" text="00:00:00">
+                           <font>
+                              <Font size="60.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="txtDate" layoutX="84.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="2023 : 3 : 11">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </AnchorPane>
+                  <Pane layoutX="31.0" layoutY="391.0" prefHeight="155.0" prefWidth="625.0" style="-fx-background-color: #1dd1a1; -fx-background-radius: 30;">
+                     <children>
+                        <Text fill="#034f8a" layoutX="225.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registered Students">
+                           <font>
+                              <Font size="33.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblTotalRooms12" fill="#034f8a" layoutX="225.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="15" wrappingWidth="220.078125">
+                           <font>
+                              <Font size="69.0" />
+                           </font>
+                        </Text>
+                        <ImageView layoutX="62.0" layoutY="28.0">
+                           <image>
+                              <Image url="@../icons/employee.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+               </children></AnchorPane>
+         </children>
+      </AnchorPane>
+      <Pane layoutX="-5.0" layoutY="45.0" prefHeight="660.0" prefWidth="259.0" style="-fx-background-color: #0984e3; -fx-background-radius: 0 80 50 0;">
+         <children>
+            <Text fill="WHITE" layoutX="19.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="19.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register Student">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="19.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Manage Room">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="19.0" layoutY="332.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reserve Room">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="19.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservation Details">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="172.0" layoutY="165.0">
+               <image>
+                  <Image url="@../icons/home.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="172.0" layoutY="95.0">
+               <image>
+                  <Image url="@../icons/booked.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="172.0" layoutY="235.0">
+               <image>
+                  <Image url="@../icons/room.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="172.0" layoutY="305.0">
+               <image>
+                  <Image url="@../icons/payment.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="172.0" layoutY="375.0">
+               <image>
+                  <Image url="@../icons/reserve.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="btnDashboard" layoutX="7.0" layoutY="92.0" onAction="#btnDashboardOnAction" prefHeight="47.0" prefWidth="252.0" text="Button" textFill="TRANSPARENT">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+            <JFXButton fx:id="btnRegisterStudent" layoutX="3.0" layoutY="162.0" onAction="#btnRegisterStudentOnAction" prefHeight="47.0" prefWidth="252.0" text="Button" textFill="TRANSPARENT">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+            <JFXButton fx:id="btnManageRoom" layoutX="3.0" layoutY="232.0" onAction="#btnManageRoomOnAction" prefHeight="47.0" prefWidth="252.0" text="Button" textFill="TRANSPARENT">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+            <JFXButton fx:id="btnReserveRoom" layoutX="3.0" layoutY="302.0" onAction="#btnReserveRoomOnAction" prefHeight="47.0" prefWidth="252.0" text="Button" textFill="TRANSPARENT">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+            <JFXButton fx:id="btnReservationDetails" layoutX="3.0" layoutY="372.0" onAction="#btnReservationDetailsOnAction" prefHeight="47.0" prefWidth="252.0" text="Button" textFill="TRANSPARENT">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXButton>
+         </children></Pane>
+      <Text fx:id="lblTopic" fill="#0984e3" layoutX="445.0" layoutY="64.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" textAlignment="RIGHT" wrappingWidth="586.798828125">
+         <font>
+            <Font size="58.0" />
+         </font>
+      </Text>
+      <Text fill="#0984e3" layoutX="719.0" layoutY="103.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Admin" textAlignment="RIGHT" wrappingWidth="312.798828125">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

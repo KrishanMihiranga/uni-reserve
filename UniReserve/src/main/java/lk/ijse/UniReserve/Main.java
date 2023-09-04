@@ -1,7 +1,11 @@
 package lk.ijse.UniReserve;
 
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Main extends Application {
 
@@ -10,7 +14,10 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        System.out.println("Hello world");
+    public void start(Stage primaryStage) throws IOException {
+        Scene scene = new Scene(new FXMLLoader(getClass().getResource("/view/dashboard_form.fxml")).load());
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Dashboard");
+        primaryStage.show();
     }
 }

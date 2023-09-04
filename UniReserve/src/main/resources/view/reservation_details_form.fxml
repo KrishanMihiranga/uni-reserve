@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="585.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.UniReserve.controller.Reservation_details_form_controller">
+    <children>
+        <Text fill="#0984e3" layoutX="47.0" layoutY="130.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Details">
+            <font>
+                <Font size="95.0" />
+            </font>
+        </Text>
+      <TableView layoutX="36.0" layoutY="146.0" prefHeight="405.0" prefWidth="928.0">
+        <columns>
+          <TableColumn prefWidth="114.0" text="Resrvation ID" />
+          <TableColumn prefWidth="117.0" text="Student ID" />
+            <TableColumn prefWidth="246.0" text="Name " />
+            <TableColumn prefWidth="175.0" text="Type" />
+            <TableColumn prefWidth="168.0" text="Date" />
+            <TableColumn prefWidth="107.0" text="Status" />
+        </columns>
+      </TableView>
+    </children>
+    <effect>
+        <DropShadow blurType="GAUSSIAN" height="47.32" radius="23.9925" spread="0.07" width="50.65">
+            <color>
+                <Color red="0.7372549176216125" green="0.7372549176216125" blue="0.7372549176216125" />
+            </color>
+        </DropShadow>
+    </effect>
+</AnchorPane>
