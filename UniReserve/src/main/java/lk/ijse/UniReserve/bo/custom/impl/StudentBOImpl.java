@@ -3,8 +3,13 @@ package lk.ijse.UniReserve.bo.custom.impl;
 import lk.ijse.UniReserve.bo.custom.StudentBO;
 import lk.ijse.UniReserve.dao.DAOFactory;
 import lk.ijse.UniReserve.dao.custom.StudentDAO;
+import lk.ijse.UniReserve.dto.RoomDTO;
 import lk.ijse.UniReserve.dto.StudentDTO;
+import lk.ijse.UniReserve.entity.Room;
 import lk.ijse.UniReserve.entity.Student;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentBOImpl implements StudentBO {
     StudentDAO studentDAO = (StudentDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.STUDENT);
@@ -28,5 +33,15 @@ public class StudentBOImpl implements StudentBO {
     public StudentDTO setFields(String text) throws Exception {
         Student student =studentDAO.setFields(text);
         return new StudentDTO(student.getStudent_id(), student.getName(), student.getAddress(), student.getContact(), student.getDob(), student.getGender());
+    }
+
+    @Override
+    public List<StudentDTO> getAll() throws Exception {
+        List<Student> Students =studentDAO.getAll();
+        List<StudentDTO> studentDTOS = new ArrayList<>();
+        for (Student student:Students) {
+            studentDTOS.add(new StudentDTO(student.getStudent_id(), student.getName(), student.getAddress(),student.getContact(),student.getDob(),student.getGender()));
+        }
+        return studentDTOS;
     }
 }

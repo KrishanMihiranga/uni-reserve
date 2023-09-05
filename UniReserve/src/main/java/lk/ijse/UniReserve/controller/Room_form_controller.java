@@ -1,19 +1,27 @@
 package lk.ijse.UniReserve.controller;
 
 import com.jfoenix.controls.JFXButton;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.UniReserve.bo.BOFactory;
 import lk.ijse.UniReserve.bo.custom.RoomBO;
-import lk.ijse.UniReserve.bo.custom.StudentBO;
 import lk.ijse.UniReserve.dto.RoomDTO;
-import lk.ijse.UniReserve.dto.StudentDTO;
+import lk.ijse.UniReserve.dto.tm.RoomTM;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
-public class Room_form_controller {
+public class Room_form_controller implements Initializable {
     @FXML
     private JFXButton btnAdd;
 
@@ -34,10 +42,50 @@ public class Room_form_controller {
 
     @FXML
     private TextField txtType;
+    @FXML
+    private TableView<RoomTM> tblRooms;
+    @FXML
+    private TableColumn<?, ?> colAvailableRooms;
+
+    @FXML
+    private TableColumn<?, ?> colKeyPrice;
+
+    @FXML
+    private TableColumn<?, ?> colRoomType;
+
+    @FXML
+    private TableColumn<?, ?> colRoomTypeId;
 
     private RoomBO roomBO = (RoomBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ROOM);
 
+    private ObservableList<RoomTM>roomTMS = FXCollections.observableArrayList();
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+            setCellValueFactories();
+            loadTableRooms();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setCellValueFactories(){
+        colRoomTypeId.setCellValueFactory(new PropertyValueFactory<>("roomTypeId"));
+        colRoomType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colKeyPrice.setCellValueFactory(new PropertyValueFactory<>("keyMoney"));
+        colAvailableRooms.setCellValueFactory(new PropertyValueFactory<>("qty"));
+    }
+    private void loadTableRooms() throws Exception {
+        roomTMS= FXCollections.observableArrayList();
+        List<RoomDTO> rooms = roomBO.getAll();
+
+        for (RoomDTO room: rooms) {
+            roomTMS.add(new RoomTM(room.getRoom_type_id(), room.getType(), room.getKey_money(), room.getQty()));
+
+        }
+        tblRooms.setItems(roomTMS);
+    }
     public void btnAddOnAction(ActionEvent event) {
 
         try{

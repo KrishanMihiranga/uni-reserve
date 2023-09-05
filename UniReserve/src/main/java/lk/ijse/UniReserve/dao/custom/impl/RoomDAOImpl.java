@@ -1,8 +1,8 @@
 package lk.ijse.UniReserve.dao.custom.impl;
 
+import org.hibernate.query.Query;
 import lk.ijse.UniReserve.dao.custom.RoomDAO;
 import lk.ijse.UniReserve.entity.Room;
-import lk.ijse.UniReserve.entity.Student;
 import lk.ijse.UniReserve.utill.FactoryConfiguration;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -13,7 +13,15 @@ public class RoomDAOImpl implements RoomDAO {
 
     @Override
     public List<Room> getAll() throws Exception {
-        return null;
+        Session session=FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query =session.createQuery("from Room");
+        List<Room> list = query.list();
+
+        transaction.commit();
+        session.close();
+        return list;
     }
 
     @Override

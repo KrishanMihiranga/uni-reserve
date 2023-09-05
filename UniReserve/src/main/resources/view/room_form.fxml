@@ -42,12 +42,12 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <TableView layoutX="412.0" layoutY="188.0" prefHeight="233.0" prefWidth="516.0">
+      <TableView fx:id="tblRooms" layoutX="412.0" layoutY="188.0" prefHeight="233.0" prefWidth="516.0">
         <columns>
-          <TableColumn prefWidth="124.0" text="ID" />
-          <TableColumn prefWidth="150.0" text="Type" />
-            <TableColumn prefWidth="157.0" text="Key Money" />
-            <TableColumn prefWidth="84.0" text="Qty" />
+          <TableColumn fx:id="colRoomTypeId" prefWidth="124.0" text="ID" />
+          <TableColumn fx:id="colRoomType" prefWidth="150.0" text="Type" />
+            <TableColumn fx:id="colKeyPrice" prefWidth="157.0" text="Key Money" />
+            <TableColumn fx:id="colAvailableRooms" prefWidth="84.0" text="Qty" />
         </columns>
       </TableView>
       <JFXButton fx:id="btnAdd" buttonType="RAISED" layoutX="103.0" layoutY="485.0" onAction="#btnAddOnAction" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: limegreen;" text="Add" textFill="WHITE">
