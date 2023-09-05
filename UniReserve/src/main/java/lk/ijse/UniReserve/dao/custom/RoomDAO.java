@@ -1,0 +1,8 @@
+package lk.ijse.UniReserve.dao.custom;
+
+import lk.ijse.UniReserve.dao.CrudDAO;
+import lk.ijse.UniReserve.entity.Room;
+
+public interface RoomDAO extends CrudDAO<Room> {
+    Room setFields(String text)throws Exception;
+}

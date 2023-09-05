@@ -3,10 +3,8 @@ package lk.ijse.UniReserve.bo.custom.impl;
 import lk.ijse.UniReserve.bo.custom.StudentBO;
 import lk.ijse.UniReserve.dao.DAOFactory;
 import lk.ijse.UniReserve.dao.custom.StudentDAO;
-import lk.ijse.UniReserve.dto.ReservationDTO;
 import lk.ijse.UniReserve.dto.StudentDTO;
 import lk.ijse.UniReserve.entity.Student;
-import org.hibernate.mapping.List;
 
 public class StudentBOImpl implements StudentBO {
     StudentDAO studentDAO = (StudentDAO) DAOFactory.getDaoFactory().getDAO(DAOFactory.DAOTypes.STUDENT);

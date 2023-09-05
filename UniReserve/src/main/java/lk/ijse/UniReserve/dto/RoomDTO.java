@@ -16,4 +16,10 @@ public class RoomDTO {
     public RoomDTO() {
 
     }
+    public RoomDTO(String room_type_id, String type, String key_money, Integer qty) {
+        this.room_type_id = room_type_id;
+        this.type = type;
+        this.key_money=key_money;
+        this.qty= qty;
+    }
 }

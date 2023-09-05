@@ -13,10 +13,10 @@
 
 <AnchorPane prefHeight="585.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.UniReserve.controller.Room_form_controller">
    <children>
-      <TextField layoutX="217.0" layoutY="385.0" prefHeight="25.0" prefWidth="166.0" />
-      <TextField layoutX="217.0" layoutY="188.0" prefHeight="25.0" prefWidth="166.0" />
-      <TextField layoutX="217.0" layoutY="319.0" prefHeight="25.0" prefWidth="166.0" />
-      <TextField layoutX="217.0" layoutY="251.0" prefHeight="25.0" prefWidth="166.0" />
+      <TextField fx:id="txtQty" layoutX="217.0" layoutY="385.0" prefHeight="25.0" prefWidth="166.0" />
+      <TextField fx:id="txtID" layoutX="217.0" layoutY="188.0" onAction="#txtIDOnAction" prefHeight="25.0" prefWidth="166.0" />
+      <TextField fx:id="txtKeyMoney" layoutX="217.0" layoutY="319.0" prefHeight="25.0" prefWidth="166.0" />
+      <TextField fx:id="txtType" layoutX="217.0" layoutY="251.0" prefHeight="25.0" prefWidth="166.0" />
       <Text fill="#0984e3" layoutX="47.0" layoutY="130.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Rooms">
          <font>
             <Font size="95.0" />
@@ -50,7 +50,7 @@
             <TableColumn prefWidth="84.0" text="Qty" />
         </columns>
       </TableView>
-      <JFXButton buttonType="RAISED" layoutX="103.0" layoutY="485.0" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: limegreen;" text="Add" textFill="WHITE">
+      <JFXButton fx:id="btnAdd" buttonType="RAISED" layoutX="103.0" layoutY="485.0" onAction="#btnAddOnAction" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: limegreen;" text="Add" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
@@ -58,7 +58,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="240.0" layoutY="485.0" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: gold;" text="Update" textFill="WHITE">
+      <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="240.0" layoutY="485.0" onAction="#btnUpdateOnAction" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: gold;" text="Update" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
@@ -66,7 +66,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXButton buttonType="RAISED" layoutX="379.0" layoutY="485.0" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: red;" text="Delete" textFill="WHITE">
+      <JFXButton fx:id="btnDelete" buttonType="RAISED" layoutX="379.0" layoutY="485.0" onAction="#btnDeleteOnAction" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: red;" text="Delete" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>

@@ -80,9 +80,7 @@ public class Student_form_controller implements Initializable {
         stage.setTitle("Find Student");
         stage.show();
     }
-    private void getValues(){
 
-    }
     public void btnAddOnAction(ActionEvent actionEvent) {
 
         try{

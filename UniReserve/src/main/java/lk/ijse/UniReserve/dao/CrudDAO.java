@@ -1,5 +1,7 @@
 package lk.ijse.UniReserve.dao;
 
+import lk.ijse.UniReserve.entity.Room;
+
 import java.util.List;
 
 public interface CrudDAO<T> extends SuperDAO{
@@ -14,4 +16,5 @@ public interface CrudDAO<T> extends SuperDAO{
     public boolean delete(String id) throws Exception;
 
     public T search(String id) throws Exception;
+
 }

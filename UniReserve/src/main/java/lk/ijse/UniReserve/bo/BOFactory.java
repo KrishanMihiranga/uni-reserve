@@ -1,5 +1,6 @@
 package lk.ijse.UniReserve.bo;
 
+import lk.ijse.UniReserve.bo.custom.impl.RoomBOImpl;
 import lk.ijse.UniReserve.bo.custom.impl.StudentBOImpl;
 
 public class BOFactory {
@@ -12,12 +13,13 @@ public class BOFactory {
     }
 
     public enum BOTypes {
-        STUDENT;
+        STUDENT, ROOM;
     }
 
     public SuperBO getBO(BOTypes type){
         switch (type){
             case STUDENT: return new StudentBOImpl();
+            case ROOM: return new RoomBOImpl();
             default: return null;
         }
     }
