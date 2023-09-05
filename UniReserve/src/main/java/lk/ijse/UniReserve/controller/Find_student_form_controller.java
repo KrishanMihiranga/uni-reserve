@@ -1,5 +1,6 @@
 package lk.ijse.UniReserve.controller;
 
+import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -40,6 +41,7 @@ public class Find_student_form_controller implements Initializable {
     @FXML
     private TableView<StudentTM> tblStudents;
 
+
     private StudentBO studentBO = (StudentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.STUDENT);
 
     private ObservableList<StudentTM> studentTMS = FXCollections.observableArrayList();
@@ -48,8 +50,7 @@ public class Find_student_form_controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
             setCellValueFactories();
-            loadTableRooms();
-
+            loadTableStudents();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -62,7 +63,7 @@ public class Find_student_form_controller implements Initializable {
         colDOB.setCellValueFactory(new PropertyValueFactory<>("dob"));
         colGender.setCellValueFactory(new PropertyValueFactory<>("gender"));
     }
-    private void loadTableRooms() throws Exception {
+    private void loadTableStudents() throws Exception {
         studentTMS= FXCollections.observableArrayList();
         List<StudentDTO> students = studentBO.getAll();
 

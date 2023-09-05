@@ -1,6 +1,7 @@
 package lk.ijse.UniReserve.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,7 +42,7 @@ public class Room_form_controller implements Initializable {
     private TextField txtQty;
 
     @FXML
-    private TextField txtType;
+    private JFXComboBox<String> txtType;
     @FXML
     private TableView<RoomTM> tblRooms;
     @FXML
@@ -64,7 +65,7 @@ public class Room_form_controller implements Initializable {
         try {
             setCellValueFactories();
             loadTableRooms();
-
+            loadType();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -86,12 +87,12 @@ public class Room_form_controller implements Initializable {
         }
         tblRooms.setItems(roomTMS);
     }
-    public void btnAddOnAction(ActionEvent event) {
+    public void btnAddOnAction(ActionEvent event) throws Exception {
 
         try{
             RoomDTO room = new RoomDTO(
                    txtID.getText(),
-                    txtType.getText(),
+                    txtType.getValue(),
                     txtKeyMoney.getText(),
                     Integer.parseInt(txtQty.getText()),
                     new ArrayList<>()
@@ -111,9 +112,10 @@ public class Room_form_controller implements Initializable {
         }catch (Exception e){
             e.printStackTrace();
         }
+        loadTableRooms();
     }
 
-    public void btnDeleteOnAction(ActionEvent event) {
+    public void btnDeleteOnAction(ActionEvent event) throws Exception {
         try{
             boolean idDeleted= roomBO.delete(txtID.getText());
             if(idDeleted){
@@ -122,14 +124,15 @@ public class Room_form_controller implements Initializable {
         }catch(Exception e){
             new Alert(Alert.AlertType.ERROR, "Error while Deleting Room :(").show();
         }
+        loadTableRooms();
     }
 
 
-    public void btnUpdateOnAction(ActionEvent event) {
+    public void btnUpdateOnAction(ActionEvent event) throws Exception {
         try{
             RoomDTO room = new RoomDTO(
                     txtID.getText(),
-                    txtType.getText(),
+                    txtType.getValue(),
                     txtKeyMoney.getText(),
                     Integer.parseInt(txtQty.getText()),
                     new ArrayList<>()
@@ -149,6 +152,7 @@ public class Room_form_controller implements Initializable {
         }catch (Exception e){
             e.printStackTrace();
         }
+        loadTableRooms();
     }
 
 
@@ -157,7 +161,7 @@ public class Room_form_controller implements Initializable {
             RoomDTO room = roomBO.setFields(txtID.getText());
             if (room!=null){
                         txtID.setText(room.getRoom_type_id());
-                        txtType.setText(room.getType());
+                        txtType.setValue(room.getType());
                         txtKeyMoney.setText(room.getKey_money());
                         txtQty.setText(String.valueOf(room.getQty()));
 
@@ -169,5 +173,17 @@ public class Room_form_controller implements Initializable {
             e.printStackTrace();
         }
     }
-
+    private void loadType() {
+        try {
+            ObservableList<String> options = FXCollections.observableArrayList(
+                    "Non-AC",
+                    "Non-AC / Food",
+                    "AC",
+                    "AC / Food"
+            );
+            txtType.setItems(options);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }

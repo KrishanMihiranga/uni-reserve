@@ -72,7 +72,6 @@ public class Student_form_controller implements Initializable {
       }
     }
 
-
     public void btnFindOnAction(ActionEvent actionEvent) throws IOException {
         Scene scene = new Scene(new FXMLLoader(getClass().getResource("/view/find_student_form.fxml")).load());
         Stage  stage =new Stage();

@@ -15,4 +15,5 @@ public interface StudentBO extends SuperBO {
     StudentDTO setFields(String text)throws Exception;
 
     List<StudentDTO> getAll() throws Exception;
+
 }

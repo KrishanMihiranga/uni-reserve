@@ -12,9 +12,9 @@
 
 <AnchorPane prefHeight="585.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.UniReserve.controller.Reservation_form_controller">
     <children>
-        <TextField layoutX="240.0" layoutY="357.0" prefHeight="25.0" prefWidth="166.0" />
-        <TextField layoutX="240.0" layoutY="188.0" prefHeight="25.0" prefWidth="166.0" />
-        <TextField layoutX="240.0" layoutY="268.0" prefHeight="25.0" prefWidth="166.0" />
+        <TextField fx:id="txtSID" layoutX="240.0" layoutY="357.0" prefHeight="25.0" prefWidth="166.0" />
+        <TextField fx:id="txtRDate" layoutX="240.0" layoutY="188.0" prefHeight="25.0" prefWidth="166.0" />
+        <TextField fx:id="txtRID" layoutX="240.0" layoutY="268.0" prefHeight="25.0" prefWidth="166.0" />
         <Text fill="#0984e3" layoutX="47.0" layoutY="130.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservation">
             <font>
                 <Font size="95.0" />
@@ -64,13 +64,13 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-      <JFXComboBox layoutX="685.0" layoutY="187.0" prefHeight="25.0" prefWidth="166.0" />
+      <JFXComboBox fx:id="cmbstatus" layoutX="685.0" layoutY="187.0" prefHeight="25.0" prefWidth="166.0" />
       <Text fill="#4a4a4a" layoutX="526.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Room Type :">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <JFXComboBox layoutX="685.0" layoutY="267.0" prefHeight="25.0" prefWidth="166.0" />
+      <JFXComboBox fx:id="cmbRType" layoutX="685.0" layoutY="267.0" prefHeight="25.0" prefWidth="166.0" />
       <JFXButton fx:id="btnDetails" buttonType="RAISED" layoutX="648.0" layoutY="483.0" onAction="#btnDetailsOnAction" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #0984e3;" text="Details" textFill="WHITE">
          <font>
             <Font size="18.0" />
