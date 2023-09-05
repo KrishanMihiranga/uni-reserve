@@ -76,10 +76,4 @@ public class Dashboard_form_controller {
         lblTopic.setText("Manage");
     }
 
-    public void btnReservationDetailsOnAction(ActionEvent actionEvent) throws IOException {
-        Node node;
-        node = FXMLLoader.load(getClass().getResource("/view/reservation_details_form.fxml"));
-        MainPane.getChildren().setAll(node);
-        lblTopic.setText("Details");
-    }
 }

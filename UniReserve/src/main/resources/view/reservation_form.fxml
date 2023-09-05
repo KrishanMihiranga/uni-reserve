@@ -30,7 +30,7 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Text>
-        <Text fill="#4a4a4a" layoutX="72.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registration ID :">
+        <Text fill="#4a4a4a" layoutX="72.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservation ID :">
             <font>
                 <Font name="System Bold" size="18.0" />
             </font>
@@ -40,7 +40,7 @@
                 <Font name="System Bold" size="18.0" />
             </font>
         </Text>
-        <JFXButton buttonType="RAISED" layoutX="103.0" layoutY="485.0" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: limegreen;" text="Add" textFill="WHITE">
+        <JFXButton buttonType="RAISED" layoutX="232.0" layoutY="483.0" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: limegreen;" text="Add" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font>
@@ -48,7 +48,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="240.0" layoutY="485.0" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: gold;" text="Update" textFill="WHITE">
+        <JFXButton buttonType="RAISED" layoutX="369.0" layoutY="483.0" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: gold;" text="Update" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font>
@@ -56,7 +56,7 @@
                 <Cursor fx:constant="HAND" />
             </cursor>
         </JFXButton>
-        <JFXButton buttonType="RAISED" layoutX="379.0" layoutY="485.0" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: red;" text="Delete" textFill="WHITE">
+        <JFXButton buttonType="RAISED" layoutX="508.0" layoutY="483.0" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: red;" text="Delete" textFill="WHITE">
             <font>
                 <Font size="18.0" />
             </font>
@@ -71,6 +71,14 @@
          </font>
       </Text>
       <JFXComboBox layoutX="685.0" layoutY="267.0" prefHeight="25.0" prefWidth="166.0" />
+      <JFXButton fx:id="btnDetails" buttonType="RAISED" layoutX="648.0" layoutY="483.0" onAction="#btnDetailsOnAction" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #0984e3;" text="Details" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
     </children>
     <effect>
         <DropShadow blurType="GAUSSIAN" height="47.32" radius="23.9925" spread="0.07" width="50.65">

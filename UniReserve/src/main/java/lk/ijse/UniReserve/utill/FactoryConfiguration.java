@@ -1,5 +1,8 @@
 package lk.ijse.UniReserve.utill;
 
+import lk.ijse.UniReserve.entity.Reservation;
+import lk.ijse.UniReserve.entity.Room;
+import lk.ijse.UniReserve.entity.Student;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -22,8 +25,10 @@ public class FactoryConfiguration {
         }
 
         configuration.setProperties(properties);
-//        configuration
-//                .addAnnotatedClass(User.class);
+       configuration
+                .addAnnotatedClass(Reservation.class)
+                .addAnnotatedClass(Room.class)
+                .addAnnotatedClass(Student.class);
         sessionFactory = configuration.buildSessionFactory();
     }
 
