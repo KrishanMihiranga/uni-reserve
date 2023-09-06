@@ -61,7 +61,15 @@ public class RoomDAOImpl implements RoomDAO {
 
     @Override
     public Room search(String id) throws Exception {
-        return null;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Room room = session.get(Room.class, id);
+
+        transaction.commit();
+        session.close();
+
+        return room;
     }
 
     @Override
@@ -70,6 +78,22 @@ public class RoomDAOImpl implements RoomDAO {
         Transaction transaction = session.beginTransaction();
 
         Room room = session.get(Room.class, text);
+
+        transaction.commit();
+        session.close();
+
+        return room;
+    }
+
+    @Override
+    public Room getRoom(String value) throws Exception {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createQuery("from Room where id = :value");
+        query.setParameter("value", value);
+
+        Room room = (Room) query.uniqueResult();
 
         transaction.commit();
         session.close();

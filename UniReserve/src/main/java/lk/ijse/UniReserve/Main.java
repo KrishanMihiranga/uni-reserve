@@ -18,7 +18,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Scene scene = new Scene(new FXMLLoader(getClass().getResource("/view/dashboard_form.fxml")).load());
+        Scene scene = new Scene(new FXMLLoader(getClass().getResource("/view/dashboard2_form.fxml")).load());
         primaryStage.setScene(scene);
         primaryStage.setTitle("Dashboard");
         primaryStage.show();

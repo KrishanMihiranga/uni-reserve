@@ -1,8 +1,6 @@
 package lk.ijse.UniReserve.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -21,7 +19,7 @@ public class Student {
     private LocalDate dob;
     private String gender;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Reservation> reservations;
 
     public Student(String id, String name, String address, String contactNo, LocalDate dob, String gender) {

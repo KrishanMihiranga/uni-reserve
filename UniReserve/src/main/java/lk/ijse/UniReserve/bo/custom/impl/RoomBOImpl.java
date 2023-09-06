@@ -4,9 +4,7 @@ import lk.ijse.UniReserve.bo.custom.RoomBO;
 import lk.ijse.UniReserve.dao.DAOFactory;
 import lk.ijse.UniReserve.dao.custom.RoomDAO;
 import lk.ijse.UniReserve.dto.RoomDTO;
-import lk.ijse.UniReserve.dto.StudentDTO;
 import lk.ijse.UniReserve.entity.Room;
-import lk.ijse.UniReserve.entity.Student;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +14,12 @@ public class RoomBOImpl implements RoomBO {
 
     @Override
     public boolean add(RoomDTO room) throws Exception {
-        return roomDAO.add(new Room(room.getRoom_type_id(), room.getType(), room.getKey_money(), room.getQty()));
+        return roomDAO.add(new Room(room.getRoom_type_id(), room.getType(), room.getKey_money(), room.getQty(),new ArrayList<>()));
     }
 
     @Override
     public boolean update(RoomDTO room) throws Exception {
-        return roomDAO.update(new Room(room.getRoom_type_id(), room.getType(), room.getKey_money(), room.getQty()));
+        return roomDAO.update(new Room(room.getRoom_type_id(), room.getType(), room.getKey_money(), room.getQty(), new ArrayList<>()));
     }
 
     @Override

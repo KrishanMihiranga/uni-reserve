@@ -18,11 +18,9 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class Dashboard_form_controller implements Initializable {
@@ -77,7 +75,7 @@ public class Dashboard_form_controller implements Initializable {
         txtTime.setText(formattedTime);
     }
     public void btnDashboardOnAction(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Dashboard_form_controller.class.getResource("/view/dashboard_form.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Dashboard_form_controller.class.getResource("/view/dashboard2_form.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();

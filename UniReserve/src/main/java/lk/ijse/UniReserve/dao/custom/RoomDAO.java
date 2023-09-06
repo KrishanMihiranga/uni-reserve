@@ -5,4 +5,6 @@ import lk.ijse.UniReserve.entity.Room;
 
 public interface RoomDAO extends CrudDAO<Room> {
     Room setFields(String text)throws Exception;
+
+    Room getRoom(String value) throws Exception;
 }

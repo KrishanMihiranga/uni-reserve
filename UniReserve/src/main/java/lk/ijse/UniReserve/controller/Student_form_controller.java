@@ -23,8 +23,6 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Student_form_controller implements Initializable {
-    @FXML
-    private JFXButton btnAdd;
 
     @FXML
     private JFXButton btnDelete;
@@ -80,34 +78,6 @@ public class Student_form_controller implements Initializable {
         stage.show();
     }
 
-    public void btnAddOnAction(ActionEvent actionEvent) {
-
-        try{
-            StudentDTO student = new StudentDTO(
-                    txtStudentId.getText(),
-                    txtName.getText(),
-                    txtAddress.getText(),
-                    txtContact.getText(),
-                    txtDOB.getValue(),
-                    genderCombo.getValue(),
-                    new ArrayList<>()
-            );
-            try {
-                boolean isAdded = studentBO.add(student);
-                if (isAdded){
-                    new Alert(Alert.AlertType.CONFIRMATION, "Student Added!").show();
-                }else{
-                    new Alert(Alert.AlertType.ERROR, "Error while Adding Student :(").show();
-                }
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
     public void btnupdateOnAction(ActionEvent actionEvent) {
         try{
             StudentDTO student = new StudentDTO(

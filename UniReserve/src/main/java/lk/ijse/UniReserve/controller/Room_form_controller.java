@@ -87,8 +87,8 @@ public class Room_form_controller implements Initializable {
         }
         tblRooms.setItems(roomTMS);
     }
-    public void btnAddOnAction(ActionEvent event) throws Exception {
 
+    public void btnAddOnAction(ActionEvent event) throws Exception {
         try{
             RoomDTO room = new RoomDTO(
                    txtID.getText(),
