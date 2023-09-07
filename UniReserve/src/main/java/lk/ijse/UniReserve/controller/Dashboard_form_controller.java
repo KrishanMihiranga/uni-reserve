@@ -15,6 +15,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import lk.ijse.UniReserve.bo.BOFactory;
+import lk.ijse.UniReserve.bo.custom.DashBoardBO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -29,39 +31,67 @@ public class Dashboard_form_controller implements Initializable {
     private AnchorPane MainPane;
 
     @FXML
-    private JFXButton btnDashboard;
-
-    @FXML
-    private JFXButton btnManageRoom;
-
-    @FXML
-    private JFXButton btnRegisterStudent;
-
-    @FXML
-    private JFXButton btnReservationDetails;
-
-    @FXML
-    private JFXButton btnReserveRoom;
-
-    @FXML
     private AnchorPane dashboardPane;
 
     @FXML
-    private Text lblTopic;
+    private Text lblTotalRooms;
 
     @FXML
-    private Text txtDate;
+    private Text lblAvailableRooms;
+
+    @FXML
+    private Text lblBookedRooms;
 
     @FXML
     private Text txtTime;
 
     @FXML
+    private Text txtDate;
+
+    @FXML
+    private Text lblREGStu;
+
+    @FXML
+    private JFXButton btnDashboard;
+
+    @FXML
+    private JFXButton btnRegisterStudent;
+
+    @FXML
+    private JFXButton btnManageRoom;
+
+    @FXML
+    private JFXButton btnReserveRoom;
+
+    @FXML
     private JFXButton btnPending;
 
+    @FXML
+    private Text lblTopic;
+    private DashBoardBO dashboardBO = (DashBoardBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.DASHBOARD);
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setTxtDateTime();
+        try {
+            setTotReservedRoomsCount();
+            setTotAvailableRoomsCount();
+            setREGStuCount();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+    private void setTotReservedRoomsCount() throws Exception {
+        lblBookedRooms.setText(String.valueOf(dashboardBO.getAllReservationCount()));
+    }
+
+    private void setTotAvailableRoomsCount() throws Exception {
+        lblAvailableRooms.setText(String.valueOf(dashboardBO.getTotOfAvailableRoomsCount()));
+    }
+    private void setREGStuCount() throws Exception {
+        lblREGStu.setText(String.valueOf(dashboardBO.getREGStuCount()));
+    }
+
     private void setTxtDateTime() {
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> updateTime()));
