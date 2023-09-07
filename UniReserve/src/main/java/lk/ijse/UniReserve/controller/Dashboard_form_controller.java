@@ -11,9 +11,14 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import lk.ijse.UniReserve.bo.BOFactory;
 import lk.ijse.UniReserve.bo.custom.DashBoardBO;
@@ -23,6 +28,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Dashboard_form_controller implements Initializable {
@@ -109,7 +115,7 @@ public class Dashboard_form_controller implements Initializable {
         txtTime.setText(formattedTime);
     }
     public void btnDashboardOnAction(ActionEvent actionEvent) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Dashboard_form_controller.class.getResource("/view/dashboard2_form.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Dashboard_form_controller.class.getResource("/view/dashboard_form.fxml"));
         Parent root = fxmlLoader.load();
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node)actionEvent.getSource()).getScene().getWindow();
@@ -144,5 +150,25 @@ public class Dashboard_form_controller implements Initializable {
         node = FXMLLoader.load(getClass().getResource("/view/pending_payments_form.fxml"));
         MainPane.getChildren().setAll(node);
         lblTopic.setText("Manage");
+    }
+
+    public void btnLogoutOnAction(ActionEvent actionEvent) throws IOException {
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to Logout?", yes, no).showAndWait();
+
+        if (result.orElse(no) == yes) {
+
+
+            Stage loginStage = (Stage) btnDashboard.getScene().getWindow();
+            loginStage.close();
+            FXMLLoader fxmlLoader= new FXMLLoader(this.getClass().getResource("/view/login_form.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+
+        }
     }
 }

@@ -128,6 +128,11 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
+            <Text fill="WHITE" layoutX="19.0" layoutY="578.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LogOut">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
             <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="172.0" layoutY="165.0">
                <image>
                   <Image url="@../icons/home.png" />
@@ -153,6 +158,11 @@
                   <Image url="@../icons/payment.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="35.0" fitWidth="35.0" layoutX="172.0" layoutY="551.0">
+               <image>
+                  <Image url="@../icons/logout.png" />
+               </image>
+            </ImageView>
             <JFXButton fx:id="btnDashboard" layoutX="7.0" layoutY="92.0" onAction="#btnDashboardOnAction" prefHeight="47.0" prefWidth="252.0" text="Button" textFill="TRANSPARENT">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -170,6 +180,11 @@
                   <Cursor fx:constant="HAND" />
                </cursor></JFXButton>
             <JFXButton fx:id="btnPending" layoutX="3.0" layoutY="358.0" onAction="#btnPendingOnAction" prefHeight="47.0" prefWidth="252.0" text="Button" textFill="TRANSPARENT">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton layoutX="3.0" layoutY="548.0" onAction="#btnLogoutOnAction" prefHeight="47.0" prefWidth="252.0" text="Button" textFill="TRANSPARENT">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

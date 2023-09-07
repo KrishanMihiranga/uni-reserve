@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #f1f2f6;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.UniReserve.controller.login_form_controller">
+    <children>
+        <Pane prefHeight="202.0" prefWidth="600.0" style="-fx-background-color: #0984e3; -fx-background-radius: 0 0 50 50;" />
+        <Pane layoutX="33.0" layoutY="28.0" prefHeight="347.0" prefWidth="531.0" style="-fx-background-color: white; -fx-background-radius: 30;">
+            <effect>
+                <DropShadow blurType="GAUSSIAN" color="#837d7d" height="48.99" radius="24.41" spread="0.07" width="50.65" />
+            </effect>
+            <children>
+                <ImageView layoutX="217.0" layoutY="1.0">
+                    <image>
+                        <Image url="@../icons/login.png" />
+                    </image>
+                </ImageView>
+                <Label layoutX="157.0" layoutY="97.0" text="CREATE NEW ACCOUNT">
+                    <font>
+                        <Font name="System Bold" size="19.0" />
+                    </font>
+                </Label>
+                <JFXTextField fx:id="tfUsername" focusColor="#405aa800" layoutX="97.0" layoutY="140.0" prefHeight="40.0" prefWidth="336.0" promptText="User Name" style="-fx-background-color: white; -fx-background-radius: 20px; -fx-border-color: #0984e3;" unFocusColor="#4d4d4d00">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <padding>
+                        <Insets left="20.0" right="20.0" />
+                    </padding>
+                </JFXTextField>
+                <JFXTextField fx:id="tfPassword" focusColor="#405aa800" layoutX="98.0" layoutY="192.0" prefHeight="40.0" prefWidth="336.0" promptText="Password" style="-fx-background-color: white; -fx-background-radius: 20px; -fx-border-color: #0984e3;" unFocusColor="#4d4d4d00">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <padding>
+                        <Insets left="20.0" right="20.0" />
+                    </padding>
+                </JFXTextField>
+                <JFXPasswordField fx:id="pfPassword" focusColor="#405aa800" focusTraversable="false" layoutX="97.0" layoutY="192.0" prefHeight="40.0" prefWidth="336.0" promptText="Password" style="-fx-background-color: white; -fx-background-radius: 20px; -fx-border-color: #0984e3;" unFocusColor="#4d4d4d00">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                    <padding>
+                        <Insets left="20.0" right="20.0" />
+                    </padding>
+                </JFXPasswordField>
+                <JFXCheckBox fx:id="cbShowPassword" checkedColor="#0984e3" focusTraversable="false" layoutX="103.0" layoutY="243.0" onAction="#cbShowPasswordOnAction" text="Show Password" />
+                <ImageView layoutX="391.0" layoutY="148.0">
+                    <image>
+                        <Image url="@../icons/person.png" />
+                    </image>
+                </ImageView>
+                <ImageView layoutX="391.0" layoutY="200.0">
+                    <image>
+                        <Image url="@../icons/key.png" />
+                    </image>
+                </ImageView>
+                <JFXButton buttonType="RAISED" focusTraversable="false" layoutX="194.0" layoutY="283.0" onAction="#btnNewLoginOnAction" prefHeight="41.0" prefWidth="145.0" style="-fx-background-color: #0984e3; -fx-background-radius: 20px;" text="Create" textFill="WHITE">
+                    <font>
+                        <Font size="15.0" />
+                    </font>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </JFXButton>
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>

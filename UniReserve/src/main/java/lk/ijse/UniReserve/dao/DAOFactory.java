@@ -1,9 +1,6 @@
 package lk.ijse.UniReserve.dao;
 
-import lk.ijse.UniReserve.dao.custom.impl.QueryDAOImpl;
-import lk.ijse.UniReserve.dao.custom.impl.ReservationDAOImpl;
-import lk.ijse.UniReserve.dao.custom.impl.RoomDAOImpl;
-import lk.ijse.UniReserve.dao.custom.impl.StudentDAOImpl;
+import lk.ijse.UniReserve.dao.custom.impl.*;
 
 public class DAOFactory {
     public static DAOFactory daoFactory;
@@ -15,7 +12,7 @@ public class DAOFactory {
     }
 
     public enum DAOTypes{
-        STUDENT, ROOM, RESERVATION, QUERY
+        STUDENT, ROOM, RESERVATION, QUERY, USER
     }
 
     public SuperDAO getDAO(DAOTypes type){
@@ -24,6 +21,7 @@ public class DAOFactory {
             case ROOM: return new RoomDAOImpl();
             case RESERVATION: return new ReservationDAOImpl();
             case QUERY: return new QueryDAOImpl();
+            case USER: return new UserDAOImpl();
             default: return null;
         }
     }
