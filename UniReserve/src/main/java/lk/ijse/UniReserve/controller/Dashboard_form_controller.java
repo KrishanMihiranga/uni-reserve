@@ -1,6 +1,7 @@
 package lk.ijse.UniReserve.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -22,6 +23,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import lk.ijse.UniReserve.bo.BOFactory;
 import lk.ijse.UniReserve.bo.custom.DashBoardBO;
+import lk.ijse.UniReserve.dto.UserDTO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -73,7 +75,15 @@ public class Dashboard_form_controller implements Initializable {
     private JFXButton btnPending;
 
     @FXML
+    private JFXTextField tfUsername;
+
+    @FXML
+    private JFXTextField tfPassword;
+    @FXML
+    private AnchorPane changeDetailsPane;
+    @FXML
     private Text lblTopic;
+    private UserDTO userDTO = new UserDTO();
     private DashBoardBO dashboardBO = (DashBoardBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.DASHBOARD);
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -82,7 +92,7 @@ public class Dashboard_form_controller implements Initializable {
             setTotReservedRoomsCount();
             setTotAvailableRoomsCount();
             setREGStuCount();
-
+            changeDetailsPane.setVisible(false);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -169,6 +179,53 @@ public class Dashboard_form_controller implements Initializable {
             stage.setScene(scene);
             stage.show();
 
+        }
+    }
+
+    public void linkChangeDetailsOnAction(ActionEvent actionEvent) {
+        loadUserDetails();
+        changeDetailsPane.setVisible(!changeDetailsPane.isVisible());
+
+    }
+
+
+    public void btnNewLoginOnAction(ActionEvent actionEvent) {
+        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+        Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to make Changes?", yes, no).showAndWait();
+        if (result.orElse(no) == yes) {
+            try {
+                userDTO.setUsername(tfUsername.getText());
+                userDTO.setPassword(tfPassword.getText());
+
+                boolean isUpdated = dashboardBO.updateUser(userDTO);
+                if (isUpdated) {
+                    new Alert(Alert.AlertType.CONFIRMATION , "User Details Updated!").show();
+
+                    linkChangeDetailsOnAction(new ActionEvent());
+                }else {
+                    new Alert(Alert.AlertType.WARNING , "User Details didn't Updated!!!").show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR , "Oops..Something went wrong!!!").show();
+            }
+        }
+
+    }
+
+    public void setUser(UserDTO user) {
+        userDTO.setUsername(user.getUsername());
+        userDTO.setPassword(user.getPassword());
+    }
+    private void loadUserDetails() {
+        try {
+            userDTO = dashboardBO.getUser(userDTO);
+
+            tfUsername.setText(userDTO.getUsername());
+            tfPassword.setText(userDTO.getPassword());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

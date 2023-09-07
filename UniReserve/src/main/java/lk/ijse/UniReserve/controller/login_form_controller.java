@@ -86,6 +86,8 @@ public class login_form_controller implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/view/dashboard_form.fxml"));
         stage.setScene(new Scene(fxmlLoader.load()));
 
+        Dashboard_form_controller dashboard_form_controller =fxmlLoader.getController();
+        dashboard_form_controller.setUser(new UserDTO(null, tfUsername.getText(), tfPassword.getText()));
         stage.setTitle("D24 Hostel System");
         stage.show();
     }
