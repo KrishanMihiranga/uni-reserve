@@ -79,33 +79,37 @@ public class Student_form_controller implements Initializable {
     }
 
     public void btnupdateOnAction(ActionEvent actionEvent) {
-        try{
-            StudentDTO student = new StudentDTO(
-                    txtStudentId.getText(),
-                    txtName.getText(),
-                    txtAddress.getText(),
-                    txtContact.getText(),
-                    txtDOB.getValue(),
-                    genderCombo.getValue(),
-                    new ArrayList<>()
-            );
-            try {
-                boolean isUpdated = studentBO.update(student);
-                if (isUpdated){
-                    new Alert(Alert.AlertType.CONFIRMATION, "Student Updated!").show();
-                }else{
-                    new Alert(Alert.AlertType.ERROR, "Error while Updating Student :(").show();
+        boolean idValid = check();
+        if (idValid){
+            try{
+                StudentDTO student = new StudentDTO(
+                        txtStudentId.getText(),
+                        txtName.getText(),
+                        txtAddress.getText(),
+                        txtContact.getText(),
+                        txtDOB.getValue(),
+                        genderCombo.getValue(),
+                        new ArrayList<>()
+                );
+                try {
+                    boolean isUpdated = studentBO.update(student);
+                    if (isUpdated){
+                        new Alert(Alert.AlertType.CONFIRMATION, "Student Updated!").show();
+                    }else{
+                        new Alert(Alert.AlertType.ERROR, "Error while Updating Student :(").show();
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
 
             }catch (Exception e){
                 e.printStackTrace();
             }
-
-        }catch (Exception e){
-            e.printStackTrace();
         }
 
     }
+
     public void btnDeleteOnAction(ActionEvent actionEvent) {
         try{
             boolean idDeleted= studentBO.delete(txtStudentId.getText());
@@ -134,5 +138,23 @@ public class Student_form_controller implements Initializable {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private boolean check() {
+
+        if (!txtName.getText().matches("^[A-Za-z]+$")){
+            new Alert(Alert.AlertType.WARNING , "Please enter a valid User Name").show();
+            return false;
+        }
+        if (!txtContact.getText().matches("^\\+?\\d{8,}$")){
+            new Alert(Alert.AlertType.WARNING, "Please enter a valid Contact number").show();
+            return false;
+        }
+        if (!txtAddress.getText().matches("^.+$")){
+            new Alert(Alert.AlertType.WARNING, "Please enter a valid Address").show();
+            return false;
+        }
+
+        return true;
     }
 }

@@ -11,6 +11,7 @@ import lk.ijse.UniReserve.dto.StudentDTO;
 import lk.ijse.UniReserve.entity.Reservation;
 import lk.ijse.UniReserve.entity.Room;
 import lk.ijse.UniReserve.entity.Student;
+import lk.ijse.UniReserve.utill.FactoryConfiguration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -131,6 +132,52 @@ public class ReservationBOImpl implements ReservationBO {
         }
 
         return reservationDTOS;
+    }
+
+    @Override
+    public ReservationDTO setFields(String text) throws Exception {
+     //need to imlement
+        return null;
+    }
+
+    @Override
+    public boolean UpdateStudent(ReservationDTO reservation) throws Exception {
+        StudentDTO studentDTO = reservation.getStudent();
+        Student student = new Student(
+                studentDTO.getStudent_id(),
+                studentDTO.getName(),
+                studentDTO.getAddress(),
+                studentDTO.getContact(),
+                studentDTO.getDob(),
+                studentDTO.getGender(),
+                new ArrayList<>()
+        );
+
+        RoomDTO roomDTO = reservation.getRoom();
+        Room room = roomDAO.search(roomDTO.getRoom_type_id());
+
+        if (room != null) {
+            Reservation reservations = new Reservation(
+                    reservation.getRes_id(),
+                    reservation.getDate(),
+                    reservation.getStatus(),
+                    student,
+                    room
+            );
+
+            student.getReservations().add(reservations);
+            room.getReservations().add(reservations);
+            room.setQty(room.getQty() - 1);
+
+            boolean isRegistered = studentDAO.update(student);
+            roomDAO.update(room);
+            reservationDAO.update(reservations);
+
+            return isRegistered;
+        } else {
+
+            throw new Exception("Room with room_type_id " + roomDTO.getRoom_type_id() + " not found.");
+        }
     }
 
 

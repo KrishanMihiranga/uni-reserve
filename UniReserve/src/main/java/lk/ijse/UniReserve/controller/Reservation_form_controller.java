@@ -19,13 +19,8 @@ import lk.ijse.UniReserve.bo.custom.ReservationBO;
 import lk.ijse.UniReserve.dto.ReservationDTO;
 import lk.ijse.UniReserve.dto.RoomDTO;
 import lk.ijse.UniReserve.dto.StudentDTO;
-import lk.ijse.UniReserve.entity.Reservation;
-import lk.ijse.UniReserve.utill.FactoryConfiguration;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.io.IOException;
-import java.lang.reflect.Executable;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -104,6 +99,7 @@ public class Reservation_form_controller implements Initializable {
             e.printStackTrace();
         }
     }
+
     private void loadGender() {
         try {
             ObservableList<String> options = FXCollections.observableArrayList(
@@ -141,10 +137,9 @@ public class Reservation_form_controller implements Initializable {
 
     }
 
-
     public void btnAddOnAction(ActionEvent actionEvent) {
-        boolean isvaluesCorrect = true;
-        if (isvaluesCorrect){
+        boolean isValid = check();
+        if (isValid){
             try {
                 StudentDTO student = new StudentDTO(
                         txtStudentId.getText(),
@@ -188,7 +183,6 @@ public class Reservation_form_controller implements Initializable {
         }
     }
 
-
     private RoomDTO getRoom(String value) {
         try {
 
@@ -206,10 +200,88 @@ public class Reservation_form_controller implements Initializable {
     }
 
     public void txtStudentIdOnAction(ActionEvent actionEvent) {
+
+        //need to implement
+        try {
+            ReservationDTO reservation = reservationBO.setFields(txtStudentId.getText());
+            if (reservation!=null){
+
+
+            }else{
+                new Alert(Alert.AlertType.WARNING, "No Matching Student found!").show();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     public void cmbRTypeOnAction(ActionEvent actionEvent) {
         RoomDTO room = getRoom(cmbRType.getValue());
         lblKMoney.setText("Rs: " + room.getKey_money());
+    }
+
+    public void btnUpdateOnAction(ActionEvent actionEvent) {
+        boolean isValid = check();
+        if (isValid){
+            try {
+                StudentDTO student = new StudentDTO(
+                        txtStudentId.getText(),
+                        txtName.getText(),
+                        txtAddress.getText(),
+                        txtContact.getText(),
+                        txtDOB.getValue(),
+                        genderCombo.getValue(),
+                        new ArrayList<>()
+                );
+
+                RoomDTO room = getRoom(cmbRType.getValue());
+
+                if (room != null) {
+                    ReservationDTO reservation = new ReservationDTO(
+                            txtRID.getText(),
+                            txtRDate.getValue(),
+                            cmbstatus.getValue(),
+                            student,
+                            room
+                    );
+
+                    student.getReservations().add(reservation);
+                    room.setReservations(new ArrayList<>());
+                    room.getReservations().add(reservation);
+
+                    boolean isRegistered = reservationBO.UpdateStudent(reservation);
+                    if (isRegistered) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Registration Completed!").show();
+                    } else {
+                        new Alert(Alert.AlertType.WARNING, "Registration Failed!!!").show();
+                    }
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Selected room is invalid or not found!").show();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Oops..Something Went Wrong...").show();
+            }
+        }
+    }
+
+
+    private boolean check() {
+
+        if (!txtName.getText().matches("^[A-Za-z]+$")){
+            new Alert(Alert.AlertType.WARNING , "Please enter a valid User Name").show();
+            return false;
+        }
+        if (!txtContact.getText().matches("^\\+?\\d{8,}$")){
+            new Alert(Alert.AlertType.WARNING, "Please enter a valid Contact number").show();
+            return false;
+        }
+        if (!txtAddress.getText().matches("^.+$")){
+            new Alert(Alert.AlertType.WARNING, "Please enter a valid Address").show();
+            return false;
+        }
+
+        return true;
     }
 }

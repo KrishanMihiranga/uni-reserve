@@ -43,6 +43,7 @@ public class login_form_controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         fieldsOnActions();
     }
+
     private void fieldsOnActions() {
         tfUsername.setOnAction((e)-> {
             pfPassword.requestFocus();
@@ -60,21 +61,22 @@ public class login_form_controller implements Initializable {
     }
 
     public void btnSignInOnAction(ActionEvent actionEvent) {
-
-            try {
-                boolean isVerifiedUser = loginBO.userVerify(tfUsername.getText(), tfPassword.getText());
-                if (isVerifiedUser){
-                    loadMainWindow();
-                }else {
-                    new Alert(Alert.AlertType.WARNING, "Login informations are wrong...!").show();
+                boolean isValid = check();
+                if (isValid){
+                    try {
+                        boolean isVerifiedUser = loginBO.userVerify(tfUsername.getText(), tfPassword.getText());
+                        if (isVerifiedUser){
+                            loadMainWindow();
+                        }else {
+                            new Alert(Alert.AlertType.WARNING, "Login informations are wrong...!").show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        new Alert(Alert.AlertType.ERROR, "Opss.. Something went wrong!!!").show();
+                    }
+                    tfUsername.setText(null);
+                    tfPassword.setText(null);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                new Alert(Alert.AlertType.ERROR, "Opss.. Something went wrong!!!").show();
-            }
-
-        tfUsername.setText(null);
-        tfPassword.setText(null);
 
     }
 
@@ -111,17 +113,34 @@ public class login_form_controller implements Initializable {
     }
 
     public void btnNewLoginOnAction(ActionEvent actionEvent) {
-        UserDTO userDTO = new UserDTO(null, tfUsername.getText(), tfPassword.getText());
 
-        try {
-            boolean isUserSaved = loginBO.addUser(userDTO);
-            if (isUserSaved){
-                new Alert(Alert.AlertType.CONFIRMATION, "Saved").show();
+            boolean isValid =check();
+            UserDTO userDTO = new UserDTO(null, tfUsername.getText(), tfPassword.getText());
+            if (isValid){
+                try {
+                    boolean isUserSaved = loginBO.addUser(userDTO);
+                    if (isUserSaved){
+                        new Alert(Alert.AlertType.CONFIRMATION, "Saved").show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR, "Opss.. Something went wrong!!!").show();
+                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-            new Alert(Alert.AlertType.ERROR, "Opss.. Something went wrong!!!").show();
+
+    }
+
+
+    private boolean check() {
+        if (!pfPassword.getText().matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")){
+            new Alert(Alert.AlertType.WARNING , "Please enter a valid Password!").show();
+            return false;
         }
+        if (!tfUsername.getText().matches("^[A-Za-z]+$")){
+            new Alert(Alert.AlertType.WARNING , "Please enter a valid User Name").show();
+            return false;
+        }
+        return true;
     }
 
 }

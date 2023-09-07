@@ -190,28 +190,43 @@ public class Dashboard_form_controller implements Initializable {
 
 
     public void btnNewLoginOnAction(ActionEvent actionEvent) {
-        ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-        ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
-        Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to make Changes?", yes, no).showAndWait();
-        if (result.orElse(no) == yes) {
-            try {
-                userDTO.setUsername(tfUsername.getText());
-                userDTO.setPassword(tfPassword.getText());
+        boolean isVaild =check();
+        if (isVaild){
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+            Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Are you sure to make Changes?", yes, no).showAndWait();
+            if (result.orElse(no) == yes) {
+                try {
+                    userDTO.setUsername(tfUsername.getText());
+                    userDTO.setPassword(tfPassword.getText());
 
-                boolean isUpdated = dashboardBO.updateUser(userDTO);
-                if (isUpdated) {
-                    new Alert(Alert.AlertType.CONFIRMATION , "User Details Updated!").show();
+                    boolean isUpdated = dashboardBO.updateUser(userDTO);
+                    if (isUpdated) {
+                        new Alert(Alert.AlertType.CONFIRMATION , "User Details Updated!").show();
 
-                    linkChangeDetailsOnAction(new ActionEvent());
-                }else {
-                    new Alert(Alert.AlertType.WARNING , "User Details didn't Updated!!!").show();
+                        linkChangeDetailsOnAction(new ActionEvent());
+                    }else {
+                        new Alert(Alert.AlertType.WARNING , "User Details didn't Updated!!!").show();
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    new Alert(Alert.AlertType.ERROR , "Oops..Something went wrong!!!").show();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-                new Alert(Alert.AlertType.ERROR , "Oops..Something went wrong!!!").show();
             }
         }
 
+
+    }
+    private boolean check() {
+        if (!tfPassword.getText().matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")){
+            new Alert(Alert.AlertType.WARNING , "Please enter a valid Password!").show();
+            return false;
+        }
+        if (!tfUsername.getText().matches("^[A-Za-z]+$")){
+            new Alert(Alert.AlertType.WARNING , "Please enter a valid User Name").show();
+            return false;
+        }
+        return true;
     }
 
     public void setUser(UserDTO user) {

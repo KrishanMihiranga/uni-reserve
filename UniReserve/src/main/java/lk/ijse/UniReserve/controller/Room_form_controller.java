@@ -77,6 +77,7 @@ public class Room_form_controller implements Initializable {
         colKeyPrice.setCellValueFactory(new PropertyValueFactory<>("keyMoney"));
         colAvailableRooms.setCellValueFactory(new PropertyValueFactory<>("qty"));
     }
+
     private void loadTableRooms() throws Exception {
         roomTMS= FXCollections.observableArrayList();
         List<RoomDTO> rooms = roomBO.getAll();
@@ -89,30 +90,34 @@ public class Room_form_controller implements Initializable {
     }
 
     public void btnAddOnAction(ActionEvent event) throws Exception {
-        try{
-            RoomDTO room = new RoomDTO(
-                   txtID.getText(),
-                    txtType.getValue(),
-                    txtKeyMoney.getText(),
-                    Integer.parseInt(txtQty.getText()),
-                    new ArrayList<>()
-            );
-            try {
-                boolean isAdded = roomBO.add(room);
-                if (isAdded){
-                    new Alert(Alert.AlertType.CONFIRMATION, "Room Added!").show();
-                }else{
-                    new Alert(Alert.AlertType.ERROR, "Error while Adding Room :(").show();
+        boolean isValid = check();
+        if (isValid){
+            try{
+                RoomDTO room = new RoomDTO(
+                        txtID.getText(),
+                        txtType.getValue(),
+                        txtKeyMoney.getText(),
+                        Integer.parseInt(txtQty.getText()),
+                        new ArrayList<>()
+                );
+                try {
+                    boolean isAdded = roomBO.add(room);
+                    if (isAdded){
+                        new Alert(Alert.AlertType.CONFIRMATION, "Room Added!").show();
+                    }else{
+                        new Alert(Alert.AlertType.ERROR, "Error while Adding Room :(").show();
+                    }
+
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
 
             }catch (Exception e){
                 e.printStackTrace();
             }
-
-        }catch (Exception e){
-            e.printStackTrace();
+            loadTableRooms();
         }
-        loadTableRooms();
+
     }
 
     public void btnDeleteOnAction(ActionEvent event) throws Exception {
@@ -126,7 +131,6 @@ public class Room_form_controller implements Initializable {
         }
         loadTableRooms();
     }
-
 
     public void btnUpdateOnAction(ActionEvent event) throws Exception {
         try{
@@ -155,7 +159,6 @@ public class Room_form_controller implements Initializable {
         loadTableRooms();
     }
 
-
     public void txtIDOnAction(ActionEvent event) {
         try {
             RoomDTO room = roomBO.setFields(txtID.getText());
@@ -173,6 +176,7 @@ public class Room_form_controller implements Initializable {
             e.printStackTrace();
         }
     }
+
     private void loadType() {
         try {
             ObservableList<String> options = FXCollections.observableArrayList(
@@ -185,5 +189,19 @@ public class Room_form_controller implements Initializable {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private boolean check() {
+
+        if (!txtKeyMoney.getText().matches("^-?\\d+(\\.\\d+)?$")){
+            new Alert(Alert.AlertType.WARNING , "Please enter a valid KeyMoney value").show();
+            return false;
+        }
+        if (!txtQty.getText().matches("^\\d+$")){
+            new Alert(Alert.AlertType.WARNING, "Please enter a valid QTY").show();
+            return false;
+        }
+
+        return true;
     }
 }
