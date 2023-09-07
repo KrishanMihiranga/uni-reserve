@@ -142,7 +142,7 @@ public class Student_form_controller implements Initializable {
 
     private boolean check() {
 
-        if (!txtName.getText().matches("^[A-Za-z]+$")){
+        if (!txtName.getText().matches("^[A-Za-zÀ-ÖØ-öø-ÿ-]+(?:\\s+[A-Za-zÀ-ÖØ-öø-ÿ-]+)+$")){
             new Alert(Alert.AlertType.WARNING , "Please enter a valid User Name").show();
             return false;
         }
