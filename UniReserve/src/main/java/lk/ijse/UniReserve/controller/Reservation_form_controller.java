@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import lk.ijse.UniReserve.bo.BOFactory;
@@ -65,7 +66,8 @@ public class Reservation_form_controller implements Initializable {
 
     @FXML
     private TextField txtAddress;
-
+    @FXML
+    private Label lblKMoney;
     @FXML
     private JFXComboBox<String> genderCombo;
     private ReservationBO reservationBO;
@@ -204,5 +206,10 @@ public class Reservation_form_controller implements Initializable {
     }
 
     public void txtStudentIdOnAction(ActionEvent actionEvent) {
+    }
+
+    public void cmbRTypeOnAction(ActionEvent actionEvent) {
+        RoomDTO room = getRoom(cmbRType.getValue());
+        lblKMoney.setText("Rs: " + room.getKey_money());
     }
 }

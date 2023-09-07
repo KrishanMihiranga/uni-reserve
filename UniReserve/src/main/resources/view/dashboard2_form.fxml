@@ -142,6 +142,11 @@
                   <Font name="System Bold" size="16.0" />
                </font>
             </Text>
+            <Text fill="WHITE" layoutX="19.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pending Payments ">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Text>
             <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="172.0" layoutY="165.0">
                <image>
                   <Image url="@../icons/home.png" />
@@ -162,6 +167,11 @@
                   <Image url="@../icons/payment.png" />
                </image>
             </ImageView>
+            <ImageView fitHeight="40.0" fitWidth="40.0" layoutX="172.0" layoutY="361.0">
+               <image>
+                  <Image url="@../icons/payment.png" />
+               </image>
+            </ImageView>
             <JFXButton fx:id="btnDashboard" layoutX="7.0" layoutY="92.0" onAction="#btnDashboardOnAction" prefHeight="47.0" prefWidth="252.0" text="Button" textFill="TRANSPARENT">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -178,6 +188,11 @@
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></JFXButton>
+            <JFXButton fx:id="btnPending" layoutX="3.0" layoutY="358.0" onAction="#btnPendingOnAction" prefHeight="47.0" prefWidth="252.0" text="Button" textFill="TRANSPARENT">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
          </children></Pane>
       <Text fx:id="lblTopic" fill="#0984e3" layoutX="445.0" layoutY="64.0" opacity="0.5" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" textAlignment="RIGHT" wrappingWidth="586.798828125">
          <font>

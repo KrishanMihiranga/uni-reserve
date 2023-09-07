@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -48,7 +49,7 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
-      <JFXComboBox fx:id="cmbRType" layoutX="772.0" layoutY="268.0" prefHeight="25.0" prefWidth="166.0" />
+      <JFXComboBox fx:id="cmbRType" layoutX="772.0" layoutY="268.0" onAction="#cmbRTypeOnAction" prefHeight="25.0" prefWidth="166.0" />
       <JFXButton fx:id="btnDetails" buttonType="RAISED" layoutX="817.0" layoutY="483.0" onAction="#btnDetailsOnAction" prefHeight="37.0" prefWidth="121.0" style="-fx-background-color: #0984e3;" text="Details" textFill="WHITE">
          <font>
             <Font size="18.0" />
@@ -94,6 +95,16 @@
          </font>
       </Text>
       <JFXComboBox fx:id="genderCombo" layoutX="188.0" layoutY="306.0" prefHeight="25.0" prefWidth="301.0" />
+      <Label layoutX="625.0" layoutY="414.0" text="Key Money :">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblKMoney" layoutX="759.0" layoutY="414.0" text="RS 000">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
     </children>
     <effect>
         <DropShadow blurType="GAUSSIAN" height="47.32" radius="23.9925" spread="0.07" width="50.65">

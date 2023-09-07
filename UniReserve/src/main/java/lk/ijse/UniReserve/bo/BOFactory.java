@@ -1,5 +1,6 @@
 package lk.ijse.UniReserve.bo;
 
+import lk.ijse.UniReserve.bo.custom.impl.FindBOImpl;
 import lk.ijse.UniReserve.bo.custom.impl.ReservationBOImpl;
 import lk.ijse.UniReserve.bo.custom.impl.RoomBOImpl;
 import lk.ijse.UniReserve.bo.custom.impl.StudentBOImpl;
@@ -14,7 +15,7 @@ public class BOFactory {
     }
 
     public enum BOTypes {
-        STUDENT, ROOM, RESERVATION
+        STUDENT, ROOM, RESERVATION, FIND
     }
 
     public SuperBO getBO(BOTypes type){
@@ -22,6 +23,7 @@ public class BOFactory {
             case STUDENT: return new StudentBOImpl();
             case ROOM: return new RoomBOImpl();
             case RESERVATION: return new ReservationBOImpl();
+            case FIND: return new FindBOImpl();
             default: return null;
         }
     }

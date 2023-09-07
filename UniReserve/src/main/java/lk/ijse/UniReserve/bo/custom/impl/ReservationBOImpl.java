@@ -94,4 +94,44 @@ public class ReservationBOImpl implements ReservationBO {
         return roomList;
     }
 
+    @Override
+    public List<ReservationDTO> getAllDetails() throws Exception {
+        List<Reservation> all = reservationDAO.getAll();
+        List<ReservationDTO> reservationDTOS = new ArrayList<>();
+        for (Reservation reservation : all) {
+            ReservationDTO reservationDTO = new ReservationDTO(
+                    reservation.getRes_id(),
+                    reservation.getDate(),
+                    reservation.getStatus(),
+                    null,
+                    null
+            );
+
+            Student student = reservation.getStudent();
+            reservationDTO.setStudent(new StudentDTO(
+                    student.getStudent_id(),
+                    student.getName(),
+                    student.getAddress(),
+                    student.getContact(),
+                    student.getDob(),
+                    student.getGender(),
+                    null
+            ));
+
+            Room room = reservation.getRoom();
+            reservationDTO.setRoom(new RoomDTO(
+                    room.getRoom_type_id(),
+                    room.getType(),
+                    room.getKey_money(),
+                    room.getQty(),
+                    null
+            ));
+
+            reservationDTOS.add(reservationDTO);
+        }
+
+        return reservationDTOS;
+    }
+
+
 }

@@ -12,7 +12,15 @@ import java.util.List;
 public class ReservationDAOImpl implements ReservationDAO {
     @Override
     public List<Reservation> getAll() throws Exception {
-        return null;
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createQuery("from Reservation");
+        List<Reservation> list = query.list();
+
+        transaction.commit();
+        session.close();
+        return list;
     }
 
     @Override

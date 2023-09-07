@@ -54,6 +54,10 @@ public class Dashboard_form_controller implements Initializable {
 
     @FXML
     private Text txtTime;
+
+    @FXML
+    private JFXButton btnPending;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setTxtDateTime();
@@ -105,4 +109,10 @@ public class Dashboard_form_controller implements Initializable {
     }
 
 
+    public void btnPendingOnAction(ActionEvent actionEvent) throws IOException {
+        Node node;
+        node = FXMLLoader.load(getClass().getResource("/view/pending_payments_form.fxml"));
+        MainPane.getChildren().setAll(node);
+        lblTopic.setText("Manage");
+    }
 }
