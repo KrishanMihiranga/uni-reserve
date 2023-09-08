@@ -1,6 +1,7 @@
 package lk.ijse.UniReserve.entity;
 
 import jakarta.persistence.*;
+import lk.ijse.UniReserve.dto.StudentDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -32,4 +33,5 @@ public class Student {
     }
 
     public Student() {}
+
 }

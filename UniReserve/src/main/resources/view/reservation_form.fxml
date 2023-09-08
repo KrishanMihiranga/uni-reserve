@@ -19,7 +19,7 @@
                 <Font size="95.0" />
             </font>
         </Text>
-        <TextField fx:id="txtRID" editable="false" layoutX="776.0" layoutY="202.0" prefHeight="25.0" prefWidth="166.0" />
+        <TextField fx:id="txtRID" layoutX="776.0" layoutY="202.0" prefHeight="25.0" prefWidth="166.0" />
         <Text fill="#4a4a4a" layoutX="603.0" layoutY="122.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Reservation Date :">
             <font>
                 <Font name="System Bold" size="18.0" />

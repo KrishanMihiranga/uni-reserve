@@ -1,6 +1,9 @@
 package lk.ijse.UniReserve.dao.custom.impl;
 
 import lk.ijse.UniReserve.dao.custom.ReservationDAO;
+import lk.ijse.UniReserve.dto.ReservationDTO;
+import lk.ijse.UniReserve.dto.RoomDTO;
+import lk.ijse.UniReserve.dto.StudentDTO;
 import lk.ijse.UniReserve.entity.Reservation;
 import lk.ijse.UniReserve.utill.FactoryConfiguration;
 import org.hibernate.Session;
@@ -114,5 +117,48 @@ public class ReservationDAOImpl implements ReservationDAO {
         session.close();
 
         return count > 0;
+    }
+
+    @Override
+    public ReservationDTO getExistingReservation(String reservationID) throws Exception {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+
+        Reservation reservation = session.get(Reservation.class, reservationID);
+
+        transaction.commit();
+        session.close();
+
+        if (reservation != null) {
+            // Create a ReservationDTO and set its properties
+            ReservationDTO reservationDTO = new ReservationDTO();
+            reservationDTO.setRes_id(reservation.getRes_id());
+            reservationDTO.setDate(reservation.getDate());
+            reservationDTO.setStatus(reservation.getStatus());
+
+            // Create a StudentDTO and set its properties
+            StudentDTO studentDTO = new StudentDTO();
+            studentDTO.setStudent_id(reservation.getStudent().getStudent_id());
+            studentDTO.setName(reservation.getStudent().getName());
+            studentDTO.setAddress(reservation.getStudent().getAddress());
+            studentDTO.setContact(reservation.getStudent().getContact());
+            studentDTO.setDob(reservation.getStudent().getDob());
+            studentDTO.setGender(reservation.getStudent().getGender());
+            reservationDTO.setStudent(studentDTO);
+
+            // Create a RoomDTO and set its properties
+            RoomDTO roomDTO = new RoomDTO();
+            roomDTO.setRoom_type_id(reservation.getRoom().getRoom_type_id());
+            roomDTO.setType(reservation.getRoom().getType());
+            roomDTO.setKey_money(reservation.getRoom().getKey_money());
+            roomDTO.setQty(reservation.getRoom().getQty());
+            reservationDTO.setRoom(roomDTO);
+
+            return reservationDTO;
+        } else {
+            return null;
+        }
+
     }
 }

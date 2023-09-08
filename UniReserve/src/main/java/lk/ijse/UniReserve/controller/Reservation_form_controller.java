@@ -226,7 +226,7 @@ public class Reservation_form_controller implements Initializable {
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
         boolean isValid = check();
-        if (isValid){
+        if (isValid) {
             try {
                 StudentDTO student = new StudentDTO(
                         txtStudentId.getText(),
@@ -241,23 +241,23 @@ public class Reservation_form_controller implements Initializable {
                 RoomDTO room = getRoom(cmbRType.getValue());
 
                 if (room != null) {
-                    ReservationDTO reservation = new ReservationDTO(
-                            txtRID.getText(),
-                            txtRDate.getValue(),
-                            cmbstatus.getValue(),
-                            student,
-                            room
-                    );
 
-                    student.getReservations().add(reservation);
-                    room.setReservations(new ArrayList<>());
-                    room.getReservations().add(reservation);
+                    ReservationDTO existingReservation = reservationBO.getExistingReservation(txtRID.getText());
 
-                    boolean isRegistered = reservationBO.UpdateStudent(reservation);
-                    if (isRegistered) {
-                        new Alert(Alert.AlertType.CONFIRMATION, "Registration Completed!").show();
+                    if (existingReservation != null) {
+                        // Update the properties of the existing reservation
+                        existingReservation.setDate(txtRDate.getValue());
+                        existingReservation.setStatus(cmbstatus.getValue());
+
+                        boolean isUpdated = reservationBO.UpdateStudent(existingReservation);
+
+                        if (isUpdated) {
+                            new Alert(Alert.AlertType.CONFIRMATION, "Update Completed!").show();
+                        } else {
+                            new Alert(Alert.AlertType.WARNING, "Update Failed!!!").show();
+                        }
                     } else {
-                        new Alert(Alert.AlertType.WARNING, "Registration Failed!!!").show();
+                        new Alert(Alert.AlertType.ERROR, "Reservation not found!").show();
                     }
                 } else {
                     new Alert(Alert.AlertType.ERROR, "Selected room is invalid or not found!").show();

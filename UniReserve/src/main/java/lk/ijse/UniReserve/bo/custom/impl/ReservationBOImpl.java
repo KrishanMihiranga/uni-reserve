@@ -190,5 +190,10 @@ public class ReservationBOImpl implements ReservationBO {
         return reservationDAO.isExistRoom(id);
     }
 
+    @Override
+    public ReservationDTO getExistingReservation(String reservationID) throws Exception {
+        return reservationDAO.getExistingReservation(reservationID);
+    }
+
 
 }
