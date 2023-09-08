@@ -25,7 +25,7 @@
             <TableColumn fx:id="colGender" prefWidth="74.0" text="Gender" />
             <TableColumn fx:id="colResId" prefWidth="113.0" text="Res ID" />
             <TableColumn fx:id="colRegDate" prefWidth="137.0" text="Reg Date" />
-            <TableColumn fx:id="colRoomId" prefWidth="126.0" text="RID" />
+            <TableColumn fx:id="colRoomId" prefWidth="126.0" text="Type" />
             <TableColumn fx:id="colStatus" prefWidth="96.0" text="Status" />
         </columns>
       </TableView>

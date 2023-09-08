@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.UniReserve.bo.BOFactory;
+import lk.ijse.UniReserve.bo.custom.ReservationBO;
 import lk.ijse.UniReserve.bo.custom.RoomBO;
 import lk.ijse.UniReserve.dto.RoomDTO;
 import lk.ijse.UniReserve.dto.tm.RoomTM;
@@ -56,6 +57,7 @@ public class Room_form_controller implements Initializable {
     private TableColumn<?, ?> colRoomTypeId;
 
     private RoomBO roomBO = (RoomBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.ROOM);
+    private ReservationBO reservationBO = (ReservationBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.RESERVATION);
 
     private ObservableList<RoomTM>roomTMS = FXCollections.observableArrayList();
     @Override
@@ -124,15 +126,29 @@ public class Room_form_controller implements Initializable {
     }
 
     public void btnDeleteOnAction(ActionEvent event) throws Exception {
-        try{
-            boolean idDeleted= roomBO.delete(txtID.getText());
-            if(idDeleted){
-                new Alert(Alert.AlertType.CONFIRMATION, "Room Removed!").show();
+        boolean isExist = reservationBO.isExistRoom(txtID.getText());
+        if (isExist){
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "This Type of Rooms are already reserved.continue?", yes, no).showAndWait();
+
+            if (result.orElse(no) == yes) {
+                try{
+                    boolean idDeleted= roomBO.delete(txtID.getText());
+                    if(idDeleted){
+                        new Alert(Alert.AlertType.CONFIRMATION, "Room Removed!").show();
+                    }
+                }catch(Exception e){
+                    new Alert(Alert.AlertType.ERROR, "Error while Deleting Room :(").show();
+                }
+                loadTableRooms();
+
             }
-        }catch(Exception e){
-            new Alert(Alert.AlertType.ERROR, "Error while Deleting Room :(").show();
+        }else{
+            new Alert(Alert.AlertType.ERROR, "Room Type not found!").show();
         }
-        loadTableRooms();
+
     }
 
     public void btnUpdateOnAction(ActionEvent event) throws Exception {
@@ -176,7 +192,7 @@ public class Room_form_controller implements Initializable {
                 new Alert(Alert.AlertType.WARNING, "No Matching Room found!").show();
             }
         }catch (Exception e){
-            e.printStackTrace();
+            new Alert(Alert.AlertType.WARNING, "No Matching Room found!").show();
         }
     }
 

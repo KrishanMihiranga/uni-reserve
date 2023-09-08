@@ -85,4 +85,34 @@ public class ReservationDAOImpl implements ReservationDAO {
         String newNumber = String.format("%0" + (lastId.length() - prefix.length()) + "d", number);
         return prefix + newNumber;
     }
+
+    @Override
+    public boolean isExist(String studentID) throws Exception {
+        Session session =FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createQuery("SELECT COUNT(*) FROM Reservation WHERE student.student_id = :studentID");
+        query.setParameter("studentID", studentID);
+        Long count = (Long) query.uniqueResult();
+
+        transaction.commit();
+        session.close();
+
+        return count > 0;
+    }
+
+    @Override
+    public boolean isExistRoom(String id) throws Exception {
+        Session session =FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createQuery("SELECT COUNT(*) FROM Reservation WHERE room.room_type_id = :id");
+        query.setParameter("id", id);
+        Long count = (Long) query.uniqueResult();
+
+        transaction.commit();
+        session.close();
+
+        return count > 0;
+    }
 }

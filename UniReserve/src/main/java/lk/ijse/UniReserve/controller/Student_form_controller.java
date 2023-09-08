@@ -9,17 +9,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import lk.ijse.UniReserve.bo.BOFactory;
+import lk.ijse.UniReserve.bo.custom.ReservationBO;
 import lk.ijse.UniReserve.bo.custom.StudentBO;
 import lk.ijse.UniReserve.dto.StudentDTO;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Student_form_controller implements Initializable {
@@ -52,6 +52,7 @@ public class Student_form_controller implements Initializable {
     private TextField txtStudentId;
 
     private StudentBO studentBO = (StudentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.STUDENT);
+    private ReservationBO reservationBO = (ReservationBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.RESERVATION);
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadGender();
@@ -110,15 +111,30 @@ public class Student_form_controller implements Initializable {
 
     }
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) {
-        try{
-            boolean idDeleted= studentBO.delete(txtStudentId.getText());
-            if(idDeleted){
-                new Alert(Alert.AlertType.CONFIRMATION, "Student Removed!").show();
+    public void btnDeleteOnAction(ActionEvent actionEvent) throws Exception {
+        boolean isExist = reservationBO.isExist(txtStudentId.getText());
+        if (isExist){
+            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Student is Already Reserved a Room.Are you sure to continue?", yes, no).showAndWait();
+
+            if (result.orElse(no) == yes) {
+                try{
+
+                    boolean idDeleted= studentBO.delete(txtStudentId.getText());
+                    if(idDeleted){
+                        new Alert(Alert.AlertType.CONFIRMATION, "Student Removed!").show();
+                    }
+                }catch(Exception e){
+                    new Alert(Alert.AlertType.ERROR, "Error while Deleting Student :(").show();
+                }
+
             }
-        }catch(Exception e){
-            new Alert(Alert.AlertType.ERROR, "Error while Deleting Student :(").show();
+        }else{
+            new Alert(Alert.AlertType.ERROR, "Student Not Found!").show();
         }
+
     }
 
     public void txtStudentIdOnAction(ActionEvent actionEvent) {
@@ -136,7 +152,7 @@ public class Student_form_controller implements Initializable {
                 new Alert(Alert.AlertType.WARNING, "No Matching Student found!").show();
             }
         }catch (Exception e){
-            e.printStackTrace();
+            new Alert(Alert.AlertType.WARNING, "No Matching Student found!").show();
         }
     }
 

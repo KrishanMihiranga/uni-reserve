@@ -180,5 +180,15 @@ public class ReservationBOImpl implements ReservationBO {
         }
     }
 
+    @Override
+    public boolean isExist(String text) throws Exception {
+        return reservationDAO.isExist(text);
+    }
+
+    @Override
+    public boolean isExistRoom(String id) throws Exception {
+        return reservationDAO.isExistRoom(id);
+    }
+
 
 }

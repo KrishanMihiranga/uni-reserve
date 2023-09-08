@@ -6,4 +6,8 @@ import lk.ijse.UniReserve.entity.Reservation;
 public interface ReservationDAO extends CrudDAO<Reservation> {
     String getNextID()throws Exception;
     String getNewID(String lastId)throws Exception;
+
+    boolean isExist(String text)throws Exception;
+
+    boolean isExistRoom(String id)throws Exception;
 }

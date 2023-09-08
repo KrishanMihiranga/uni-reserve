@@ -23,4 +23,8 @@ public interface ReservationBO extends SuperBO {
     ReservationDTO setFields(String text)throws Exception;
 
     boolean UpdateStudent(ReservationDTO reservation)throws Exception;
+
+    boolean isExist(String text)throws Exception;
+
+    boolean isExistRoom(String text)throws Exception;
 }
