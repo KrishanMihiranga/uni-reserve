@@ -136,7 +136,7 @@ public class ReservationBOImpl implements ReservationBO {
 
     @Override
     public ReservationDTO setFields(String text) throws Exception {
-     //need to imlement
+     //need to implement
         return null;
     }
 

@@ -42,4 +42,9 @@ public class RoomBOImpl implements RoomBO {
         }
         return roomDTOS;
     }
+
+    @Override
+    public Integer getTotQtyOfRoom(String room_type_id) throws Exception {
+        return roomDAO.getTotQtyOfRooms(room_type_id);
+    }
 }

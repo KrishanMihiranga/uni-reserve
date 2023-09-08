@@ -154,6 +154,10 @@ public class Student_form_controller implements Initializable {
             new Alert(Alert.AlertType.WARNING, "Please enter a valid Address").show();
             return false;
         }
+        if (!txtStudentId.getText().matches("^STD\\d+$")){
+            new Alert(Alert.AlertType.WARNING, "Please enter a valid ID").show();
+            return false;
+        }
 
         return true;
     }

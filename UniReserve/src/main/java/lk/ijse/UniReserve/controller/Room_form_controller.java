@@ -7,10 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import lk.ijse.UniReserve.bo.BOFactory;
 import lk.ijse.UniReserve.bo.custom.RoomBO;
@@ -20,6 +17,7 @@ import lk.ijse.UniReserve.dto.tm.RoomTM;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Room_form_controller implements Initializable {
@@ -42,7 +40,7 @@ public class Room_form_controller implements Initializable {
     private TextField txtQty;
 
     @FXML
-    private JFXComboBox<String> txtType;
+    private TextField txtType;
     @FXML
     private TableView<RoomTM> tblRooms;
     @FXML
@@ -65,7 +63,6 @@ public class Room_form_controller implements Initializable {
         try {
             setCellValueFactories();
             loadTableRooms();
-            loadType();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -83,7 +80,13 @@ public class Room_form_controller implements Initializable {
         List<RoomDTO> rooms = roomBO.getAll();
 
         for (RoomDTO room: rooms) {
-            roomTMS.add(new RoomTM(room.getRoom_type_id(), room.getType(), room.getKey_money(), room.getQty()));
+            RoomTM roomTM = new RoomTM(
+                    room.getRoom_type_id(),
+                    room.getType(),
+                    room.getKey_money(),
+                    room.getQty()
+            );
+            roomTMS.add(roomTM);
 
         }
         tblRooms.setItems(roomTMS);
@@ -95,7 +98,7 @@ public class Room_form_controller implements Initializable {
             try{
                 RoomDTO room = new RoomDTO(
                         txtID.getText(),
-                        txtType.getValue(),
+                        txtType.getText(),
                         txtKeyMoney.getText(),
                         Integer.parseInt(txtQty.getText()),
                         new ArrayList<>()
@@ -136,7 +139,7 @@ public class Room_form_controller implements Initializable {
         try{
             RoomDTO room = new RoomDTO(
                     txtID.getText(),
-                    txtType.getValue(),
+                    txtType.getText(),
                     txtKeyMoney.getText(),
                     Integer.parseInt(txtQty.getText()),
                     new ArrayList<>()
@@ -164,7 +167,7 @@ public class Room_form_controller implements Initializable {
             RoomDTO room = roomBO.setFields(txtID.getText());
             if (room!=null){
                         txtID.setText(room.getRoom_type_id());
-                        txtType.setValue(room.getType());
+                        txtType.setText(room.getType());
                         txtKeyMoney.setText(room.getKey_money());
                         txtQty.setText(String.valueOf(room.getQty()));
 
@@ -172,20 +175,6 @@ public class Room_form_controller implements Initializable {
             }else{
                 new Alert(Alert.AlertType.WARNING, "No Matching Room found!").show();
             }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
-    private void loadType() {
-        try {
-            ObservableList<String> options = FXCollections.observableArrayList(
-                    "Non-AC",
-                    "Non-AC / Food",
-                    "AC",
-                    "AC / Food"
-            );
-            txtType.setItems(options);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -201,6 +190,10 @@ public class Room_form_controller implements Initializable {
             new Alert(Alert.AlertType.WARNING, "Please enter a valid QTY").show();
             return false;
         }
+        if (!txtID.getText().matches("^RM-\\d+$")){
+                    new Alert(Alert.AlertType.WARNING, "Please enter a valid ID").show();
+                    return false;
+                }
 
         return true;
     }

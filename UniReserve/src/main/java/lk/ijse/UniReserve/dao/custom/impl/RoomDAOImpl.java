@@ -1,5 +1,6 @@
 package lk.ijse.UniReserve.dao.custom.impl;
 
+import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import lk.ijse.UniReserve.dao.custom.RoomDAO;
 import lk.ijse.UniReserve.entity.Room;
@@ -99,5 +100,21 @@ public class RoomDAOImpl implements RoomDAO {
         session.close();
 
         return room;
+    }
+
+    @Override
+    public Integer getTotQtyOfRooms(String room_type_id) throws Exception {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query hqlQuery = session.createQuery("SELECT COUNT(*) FROM Reservation WHERE roomType.id = :roomTypeId");
+        hqlQuery.setParameter("roomTypeId", room_type_id);
+        Long result = (Long) hqlQuery.uniqueResult();
+
+        transaction.commit();
+        session.close();
+
+        return Math.toIntExact(result);
+
     }
 }

@@ -15,4 +15,6 @@ public interface RoomBO extends SuperBO {
     RoomDTO setFields(String text)throws Exception;
 
     List<RoomDTO> getAll() throws Exception;
+
+    Integer getTotQtyOfRoom(String room_type_id) throws Exception;
 }

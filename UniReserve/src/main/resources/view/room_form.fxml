@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -12,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="585.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.UniReserve.controller.Room_form_controller">
+<AnchorPane prefHeight="585.0" prefWidth="1000.0" style="-fx-background-color: white; -fx-border-radius: 20; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.UniReserve.controller.Room_form_controller">
    <children>
       <TextField fx:id="txtQty" layoutX="217.0" layoutY="385.0" prefHeight="25.0" prefWidth="166.0" />
       <TextField fx:id="txtID" layoutX="217.0" layoutY="188.0" onAction="#txtIDOnAction" prefHeight="25.0" prefWidth="166.0" />
@@ -74,12 +73,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <JFXComboBox fx:id="txtType" layoutX="217.0" layoutY="250.0" prefHeight="25.0" prefWidth="166.0" />
+      <TextField fx:id="txtType" layoutX="218.0" layoutY="250.0" prefHeight="25.0" prefWidth="166.0" />
    </children>
    <effect>
       <DropShadow blurType="GAUSSIAN" height="47.32" radius="23.9925" spread="0.07" width="50.65">
          <color>
-            <Color red="0.7372549176216125" green="0.7372549176216125" blue="0.7372549176216125" />
+            <Color blue="0.7372549176216125" green="0.7372549176216125" red="0.7372549176216125" />
          </color>
       </DropShadow>
    </effect>

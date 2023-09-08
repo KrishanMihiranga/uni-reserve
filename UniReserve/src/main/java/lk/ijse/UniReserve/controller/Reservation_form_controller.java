@@ -19,6 +19,7 @@ import lk.ijse.UniReserve.bo.custom.ReservationBO;
 import lk.ijse.UniReserve.dto.ReservationDTO;
 import lk.ijse.UniReserve.dto.RoomDTO;
 import lk.ijse.UniReserve.dto.StudentDTO;
+import lk.ijse.UniReserve.dto.tm.RoomTypesTM;
 
 import java.io.IOException;
 import java.net.URL;
@@ -66,6 +67,8 @@ public class Reservation_form_controller implements Initializable {
     @FXML
     private JFXComboBox<String> genderCombo;
     private ReservationBO reservationBO;
+    private ObservableList<String> roomTypes;
+    private ObservableList<RoomTypesTM> roomTMS;
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         reservationBO= (ReservationBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.RESERVATION);
@@ -113,18 +116,19 @@ public class Reservation_form_controller implements Initializable {
         }
     }
 
-    private void loadType() {
-        try {
-            ObservableList<String> options = FXCollections.observableArrayList(
-                    "Non-AC",
-                    "Non-AC / Food",
-                    "AC",
-                    "AC / Food"
-            );
-            cmbRType.setItems(options);
-        }catch (Exception e){
-            e.printStackTrace();
+    private void loadType() throws Exception {
+        roomTypes = FXCollections.observableArrayList();
+        roomTMS = FXCollections.observableArrayList();
+
+        List<RoomDTO> allRooms = reservationBO.getAllRooms();
+        for (RoomDTO room : allRooms) {
+            roomTMS.add(new RoomTypesTM(room.getRoom_type_id(), room.getType(), room.getKey_money(), room.getQty()));
+
+            if (room.getQty() > 0){
+                roomTypes.add(room.getType());
+            }
         }
+        cmbRType.setItems(roomTypes);
     }
 
     @FXML
@@ -266,7 +270,6 @@ public class Reservation_form_controller implements Initializable {
         }
     }
 
-
     private boolean check() {
 
         if (!txtName.getText().matches("^[A-Za-zÀ-ÖØ-öø-ÿ-]+(?:\\s+[A-Za-zÀ-ÖØ-öø-ÿ-]+)+$")){
@@ -279,6 +282,10 @@ public class Reservation_form_controller implements Initializable {
         }
         if (!txtAddress.getText().matches("^.+$")){
             new Alert(Alert.AlertType.WARNING, "Please enter a valid Address").show();
+            return false;
+        }
+        if (!txtStudentId.getText().matches("^STD\\d+$")){
+            new Alert(Alert.AlertType.WARNING, "Please enter a valid SID").show();
             return false;
         }
 
