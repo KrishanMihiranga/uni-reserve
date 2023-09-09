@@ -109,6 +109,7 @@ public class Room_form_controller implements Initializable {
                     boolean isAdded = roomBO.add(room);
                     if (isAdded){
                         new Alert(Alert.AlertType.CONFIRMATION, "Room Added!").show();
+                        clearFields();
                     }else{
                         new Alert(Alert.AlertType.ERROR, "Error while Adding Room :(").show();
                     }
@@ -137,6 +138,7 @@ public class Room_form_controller implements Initializable {
                 boolean idDeleted= roomBO.delete(txtID.getText());
                 if(idDeleted){
                     new Alert(Alert.AlertType.CONFIRMATION, "Room Removed!").show();
+                    clearFields();
                 }
             }catch(Exception e){
                 new Alert(Alert.AlertType.ERROR, "Error while Deleting Room :(").show();
@@ -160,6 +162,7 @@ public class Room_form_controller implements Initializable {
                 boolean isUpdated = roomBO.update(room);
                 if (isUpdated){
                     new Alert(Alert.AlertType.CONFIRMATION, "Room Updated!").show();
+                    clearFields();
                 }else{
                     new Alert(Alert.AlertType.ERROR, "Error while Updating Room :(").show();
                 }
@@ -208,5 +211,12 @@ public class Room_form_controller implements Initializable {
                 }
 
         return true;
+    }
+
+    private void clearFields(){
+        txtID.setText(null);
+        txtType.setText(null);
+        txtKeyMoney.setText(null);
+        txtQty.setText(null);
     }
 }

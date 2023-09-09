@@ -157,7 +157,7 @@ public class Reservation_form_controller implements Initializable {
 
                 RoomDTO room = getRoom(cmbRType.getValue());
 
-                if (room != null) { // Check if room is not null
+                if (room != null) {
                     ReservationDTO reservation = new ReservationDTO(
                             txtRID.getText(),
                             txtRDate.getValue(),
@@ -173,6 +173,7 @@ public class Reservation_form_controller implements Initializable {
                     boolean isRegistered = reservationBO.registerStudent(reservation);
                     if (isRegistered) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Registration Completed!").show();
+                        clearFields();
                     } else {
                         new Alert(Alert.AlertType.WARNING, "Registration Failed!!!").show();
                     }
@@ -279,5 +280,16 @@ public class Reservation_form_controller implements Initializable {
         }
 
         return true;
+    }
+
+    private void clearFields(){
+        txtStudentId.setText(null);
+        txtName.setText(null);
+        txtDOB.setValue(null);
+        txtContact.setText(null);
+        genderCombo.setValue(null);
+        txtAddress.setText(null);
+        cmbRType.setValue(null);
+        cmbstatus.setValue(null);
     }
 }

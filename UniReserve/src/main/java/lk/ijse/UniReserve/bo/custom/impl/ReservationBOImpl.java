@@ -60,7 +60,7 @@ public class ReservationBOImpl implements ReservationBO {
         RoomDTO roomDTO = reservation.getRoom();
         Room room = roomDAO.search(roomDTO.getRoom_type_id());
 
-        if (room != null) { // Check if room is not null
+        if (room != null) {
             Reservation reservations = new Reservation(
                     reservation.getRes_id(),
                     reservation.getDate(),
@@ -78,7 +78,6 @@ public class ReservationBOImpl implements ReservationBO {
 
             return isRegistered;
         } else {
-            // Handle the case where the room is not found
             throw new Exception("Room with room_type_id " + roomDTO.getRoom_type_id() + " not found.");
         }
     }
@@ -137,8 +136,6 @@ public class ReservationBOImpl implements ReservationBO {
     @Override
     public String setFields(String text) throws Exception {
         Reservation reservation =reservationDAO.setFields(text);
-
-        System.out.println(reservation.getStatus());
         return reservation.getStatus();
 
         /*Student student = reservation.getStudent();

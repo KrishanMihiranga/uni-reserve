@@ -112,6 +112,7 @@ public class Student_form_controller implements Initializable {
                     boolean isUpdated = studentBO.update(student);
                     boolean isStatusUpdated = reservationBO.updateStatus(txtStudentId.getText(), cmbStatus.getValue());
                     if (isUpdated){
+                        clearFields();
                         new Alert(Alert.AlertType.CONFIRMATION, "Student Updated!").show();
                     }else{
                         new Alert(Alert.AlertType.ERROR, "Error while Updating Student :(").show();
@@ -138,6 +139,7 @@ public class Student_form_controller implements Initializable {
 
                 boolean idDeleted= studentBO.delete(txtStudentId.getText());
                 if(idDeleted){
+                    clearFields();
                     new Alert(Alert.AlertType.CONFIRMATION, "Student Removed!").show();
                 }
             }catch(Exception e){
@@ -190,5 +192,15 @@ public class Student_form_controller implements Initializable {
         }
 
         return true;
+    }
+
+    private void clearFields(){
+        txtStudentId.setText(null);
+        txtDOB.setValue(null);
+        genderCombo.setValue(null);
+        cmbStatus.setValue(null);
+        txtName.setText(null);
+        txtContact.setText(null);
+        txtAddress.setText(null);
     }
 }
