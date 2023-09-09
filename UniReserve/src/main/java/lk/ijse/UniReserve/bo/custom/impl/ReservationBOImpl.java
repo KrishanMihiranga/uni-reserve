@@ -135,9 +135,19 @@ public class ReservationBOImpl implements ReservationBO {
     }
 
     @Override
-    public ReservationDTO setFields(String text) throws Exception {
-     //need to implement
-        return null;
+    public String setFields(String text) throws Exception {
+        Reservation reservation =reservationDAO.setFields(text);
+
+        System.out.println(reservation.getStatus());
+        return reservation.getStatus();
+
+        /*Student student = reservation.getStudent();
+        StudentDTO studentDTO = new StudentDTO(student.getStudent_id(), student.getName(), student.getAddress(), student.getContact(), student.getDob(), student.getGender());
+
+        Room room = reservation.getRoom();
+        RoomDTO roomDTO = new RoomDTO(room.getRoom_type_id(), room.getType(), room.getKey_money(), room.getQty());
+
+        return new ReservationDTO(reservation.getRes_id(), reservation.getDate(), reservation.getStatus(),studentDTO,roomDTO );*/
     }
 
     @Override
@@ -193,6 +203,11 @@ public class ReservationBOImpl implements ReservationBO {
     @Override
     public ReservationDTO getExistingReservation(String reservationID) throws Exception {
         return reservationDAO.getExistingReservation(reservationID);
+    }
+
+    @Override
+    public boolean updateStatus(String sId, String value) throws Exception {
+        return reservationDAO.updateStatus(sId, value);
     }
 
 

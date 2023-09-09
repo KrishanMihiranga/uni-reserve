@@ -20,7 +20,7 @@ public interface ReservationBO extends SuperBO {
 
     List<ReservationDTO> getAllDetails()throws Exception;
 
-    ReservationDTO setFields(String text)throws Exception;
+    String setFields(String text)throws Exception;
 
     boolean UpdateStudent(ReservationDTO reservation)throws Exception;
 
@@ -29,4 +29,6 @@ public interface ReservationBO extends SuperBO {
     boolean isExistRoom(String text)throws Exception;
 
     ReservationDTO getExistingReservation(String text)throws Exception;
+
+    boolean updateStatus(String text, String value)throws Exception;
 }

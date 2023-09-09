@@ -78,6 +78,12 @@
          </cursor>
       </JFXButton>
       <DatePicker fx:id="txtDOB" layoutX="234.0" layoutY="313.0" />
+      <Text fill="#4a4a4a" layoutX="71.0" layoutY="459.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status :">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <JFXComboBox fx:id="cmbStatus" layoutX="231.0" layoutY="440.0" prefHeight="25.0" prefWidth="166.0" />
     </children>
    <effect>
       <DropShadow blurType="GAUSSIAN" height="47.32" radius="23.9925" spread="0.07" width="50.65">

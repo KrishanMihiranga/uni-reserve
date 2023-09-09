@@ -128,25 +128,21 @@ public class Room_form_controller implements Initializable {
     public void btnDeleteOnAction(ActionEvent event) throws Exception {
         boolean isExist = reservationBO.isExistRoom(txtID.getText());
         if (isExist){
-            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-            Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "This Type of Rooms are already reserved.continue?", yes, no).showAndWait();
+            new Alert(Alert.AlertType.WARNING, "Couldn't Delete! Rooms already reserved of this type.").show();
 
-            if (result.orElse(no) == yes) {
-                try{
-                    boolean idDeleted= roomBO.delete(txtID.getText());
-                    if(idDeleted){
-                        new Alert(Alert.AlertType.CONFIRMATION, "Room Removed!").show();
-                    }
-                }catch(Exception e){
-                    new Alert(Alert.AlertType.ERROR, "Error while Deleting Room :(").show();
-                }
-                loadTableRooms();
 
-            }
         }else{
-            new Alert(Alert.AlertType.ERROR, "Room Type not found!").show();
+            try{
+                boolean idDeleted= roomBO.delete(txtID.getText());
+                if(idDeleted){
+                    new Alert(Alert.AlertType.CONFIRMATION, "Room Removed!").show();
+                }
+            }catch(Exception e){
+                new Alert(Alert.AlertType.ERROR, "Error while Deleting Room :(").show();
+            }
+            loadTableRooms();
+
         }
 
     }

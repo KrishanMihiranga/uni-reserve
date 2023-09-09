@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 import lk.ijse.UniReserve.bo.BOFactory;
 import lk.ijse.UniReserve.bo.custom.ReservationBO;
 import lk.ijse.UniReserve.bo.custom.StudentBO;
+import lk.ijse.UniReserve.dto.ReservationDTO;
 import lk.ijse.UniReserve.dto.StudentDTO;
 
 import java.io.IOException;
@@ -49,6 +50,9 @@ public class Student_form_controller implements Initializable {
     private TextField txtName;
 
     @FXML
+    private JFXComboBox<String> cmbStatus;
+
+    @FXML
     private TextField txtStudentId;
 
     private StudentBO studentBO = (StudentBO) BOFactory.getBoFactory().getBO(BOFactory.BOTypes.STUDENT);
@@ -56,6 +60,7 @@ public class Student_form_controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         loadGender();
+        loadStatus();
     }
 
     private void loadGender(){
@@ -66,6 +71,17 @@ public class Student_form_controller implements Initializable {
                   "Other"
           );
           genderCombo.setItems(options);
+      }catch (Exception e){
+          e.printStackTrace();
+      }
+    }
+ private void loadStatus(){
+      try {
+          ObservableList<String> options = FXCollections.observableArrayList(
+                  "Paid",
+                  "Pending"
+          );
+          cmbStatus.setItems(options);
       }catch (Exception e){
           e.printStackTrace();
       }
@@ -94,6 +110,7 @@ public class Student_form_controller implements Initializable {
                 );
                 try {
                     boolean isUpdated = studentBO.update(student);
+                    boolean isStatusUpdated = reservationBO.updateStatus(txtStudentId.getText(), cmbStatus.getValue());
                     if (isUpdated){
                         new Alert(Alert.AlertType.CONFIRMATION, "Student Updated!").show();
                     }else{
@@ -114,25 +131,20 @@ public class Student_form_controller implements Initializable {
     public void btnDeleteOnAction(ActionEvent actionEvent) throws Exception {
         boolean isExist = reservationBO.isExist(txtStudentId.getText());
         if (isExist){
-            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
-            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-            Optional<ButtonType> result = new Alert(Alert.AlertType.INFORMATION, "Student is Already Reserved a Room.Are you sure to continue?", yes, no).showAndWait();
-
-            if (result.orElse(no) == yes) {
-                try{
-
-                    boolean idDeleted= studentBO.delete(txtStudentId.getText());
-                    if(idDeleted){
-                        new Alert(Alert.AlertType.CONFIRMATION, "Student Removed!").show();
-                    }
-                }catch(Exception e){
-                    new Alert(Alert.AlertType.ERROR, "Error while Deleting Student :(").show();
-                }
-
-            }
+        new Alert(Alert.AlertType.WARNING, "Couldn't Delete! Student is already in use.").show();
         }else{
-            new Alert(Alert.AlertType.ERROR, "Student Not Found!").show();
+            try{
+
+                boolean idDeleted= studentBO.delete(txtStudentId.getText());
+                if(idDeleted){
+                    new Alert(Alert.AlertType.CONFIRMATION, "Student Removed!").show();
+                }
+            }catch(Exception e){
+                new Alert(Alert.AlertType.ERROR, "Error while Deleting Student :(").show();
+            }
+
+
         }
 
     }
@@ -140,18 +152,20 @@ public class Student_form_controller implements Initializable {
     public void txtStudentIdOnAction(ActionEvent actionEvent) {
         try {
             StudentDTO student = studentBO.setFields(txtStudentId.getText());
-            if (student!=null){
 
+            if (student!=null){
                 txtStudentId.setText(student.getStudent_id());
                 txtName.setText(student.getName());
                 txtAddress.setText(student.getAddress());
                 txtContact.setText(student.getContact());
                 txtDOB.setValue(student.getDob());
                 genderCombo.setValue(student.getGender());
+                cmbStatus.setValue(reservationBO.setFields(txtStudentId.getText()));
             }else{
-                new Alert(Alert.AlertType.WARNING, "No Matching Student found!").show();
+                new Alert(Alert.AlertType.WARNING, "No Matching Student or Reservation found!").show();
             }
         }catch (Exception e){
+            e.printStackTrace();
             new Alert(Alert.AlertType.WARNING, "No Matching Student found!").show();
         }
     }

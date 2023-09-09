@@ -206,17 +206,6 @@ public class Reservation_form_controller implements Initializable {
     public void txtStudentIdOnAction(ActionEvent actionEvent) {
 
         //need to implement
-        try {
-            ReservationDTO reservation = reservationBO.setFields(txtStudentId.getText());
-            if (reservation!=null){
-
-
-            }else{
-                new Alert(Alert.AlertType.WARNING, "No Matching Student found!").show();
-            }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     public void cmbRTypeOnAction(ActionEvent actionEvent) {

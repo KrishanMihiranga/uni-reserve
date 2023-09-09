@@ -161,4 +161,46 @@ public class ReservationDAOImpl implements ReservationDAO {
         }
 
     }
+
+    @Override
+    public Reservation setFields(String studentID) throws Exception {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        Query query = session.createQuery("from Reservation WHERE student.student_id = ?1");
+        query.setParameter(1, studentID);
+        List<Reservation> list = query.list();
+        transaction.commit();
+        session.close();
+        return list.get(0);
+    }
+
+    @Override
+    public boolean updateStatus(String sId, String value) throws Exception {
+        Session session = FactoryConfiguration.getInstance().getSession();
+        Transaction transaction = session.beginTransaction();
+
+        try {
+            String hql = "UPDATE Reservation R SET R.status = :newStatus WHERE R.student.student_id = :studentId";
+            Query query = session.createQuery(hql);
+
+            query.setParameter("newStatus", value);
+            query.setParameter("studentId", sId);
+
+            int updatedRows = query.executeUpdate();
+
+            transaction.commit();
+
+            return updatedRows > 0;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            throw e;
+        } finally {
+
+            session.close();
+        }
+    }
+
 }

@@ -13,4 +13,8 @@ public interface ReservationDAO extends CrudDAO<Reservation> {
     boolean isExistRoom(String id)throws Exception;
 
     ReservationDTO getExistingReservation(String reservationID)throws Exception;
+
+    Reservation setFields(String text)throws Exception;
+
+    boolean updateStatus(String sId, String value)throws Exception;
 }
