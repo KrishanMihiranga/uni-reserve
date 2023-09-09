@@ -214,52 +214,6 @@ public class Reservation_form_controller implements Initializable {
         lblKMoney.setText("Rs: " + room.getKey_money());
     }
 
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
-        boolean isValid = check();
-        if (isValid) {
-            try {
-                StudentDTO student = new StudentDTO(
-                        txtStudentId.getText(),
-                        txtName.getText(),
-                        txtAddress.getText(),
-                        txtContact.getText(),
-                        txtDOB.getValue(),
-                        genderCombo.getValue(),
-                        new ArrayList<>()
-                );
-
-                RoomDTO room = getRoom(cmbRType.getValue());
-
-                if (room != null) {
-
-                    ReservationDTO existingReservation = reservationBO.getExistingReservation(txtRID.getText());
-
-                    if (existingReservation != null) {
-                        // Update the properties of the existing reservation
-                        existingReservation.setDate(txtRDate.getValue());
-                        existingReservation.setStatus(cmbstatus.getValue());
-
-                        boolean isUpdated = reservationBO.UpdateStudent(existingReservation);
-
-                        if (isUpdated) {
-                            new Alert(Alert.AlertType.CONFIRMATION, "Update Completed!").show();
-                        } else {
-                            new Alert(Alert.AlertType.WARNING, "Update Failed!!!").show();
-                        }
-                    } else {
-                        new Alert(Alert.AlertType.ERROR, "Reservation not found!").show();
-                    }
-                } else {
-                    new Alert(Alert.AlertType.ERROR, "Selected room is invalid or not found!").show();
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                new Alert(Alert.AlertType.ERROR, "Oops..Something Went Wrong...").show();
-            }
-        }
-    }
-
     private boolean check() {
 
         if (!txtName.getText().matches("^[A-Za-zÀ-ÖØ-öø-ÿ-]+(?:\\s+[A-Za-zÀ-ÖØ-öø-ÿ-]+)+$")){
@@ -289,7 +243,6 @@ public class Reservation_form_controller implements Initializable {
         txtContact.setText(null);
         genderCombo.setValue(null);
         txtAddress.setText(null);
-        cmbRType.setValue(null);
         cmbstatus.setValue(null);
     }
 }

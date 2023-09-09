@@ -12,6 +12,8 @@ import lk.ijse.UniReserve.entity.Reservation;
 import lk.ijse.UniReserve.entity.Room;
 import lk.ijse.UniReserve.entity.Student;
 import lk.ijse.UniReserve.utill.FactoryConfiguration;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +46,7 @@ public class ReservationBOImpl implements ReservationBO {
         return studentList;
     }
 
-    @Override
+    /*@Override
     public boolean registerStudent(ReservationDTO reservation) throws Exception {
         StudentDTO studentDTO = reservation.getStudent();
         Student student = new Student(
@@ -81,7 +83,72 @@ public class ReservationBOImpl implements ReservationBO {
             throw new Exception("Room with room_type_id " + roomDTO.getRoom_type_id() + " not found.");
         }
     }
+*/
+    @Override
+    public boolean registerStudent(ReservationDTO reservation) throws Exception {
+        StudentDTO studentDTO = reservation.getStudent();
+        RoomDTO roomDTO = reservation.getRoom();
 
+        // Data Validation
+        if (studentDTO == null || roomDTO == null) {
+            throw new Exception("Invalid student or room data.");
+        }
+
+        Session session = null;
+        Transaction transaction = null;
+
+        try {
+            session = FactoryConfiguration.getInstance().getSession();
+            transaction = session.beginTransaction();
+
+            // Check if room exists
+            Room room = roomDAO.search(roomDTO.getRoom_type_id());
+            if (room == null) {
+                throw new Exception("Room with room_type_id " + roomDTO.getRoom_type_id() + " not found.");
+            }
+
+            // Create Student entity
+            Student student = new Student(
+                    studentDTO.getStudent_id(),
+                    studentDTO.getName(),
+                    studentDTO.getAddress(),
+                    studentDTO.getContact(),
+                    studentDTO.getDob(),
+                    studentDTO.getGender(),
+                    new ArrayList<>()
+            );
+
+            // Create Reservation entity
+            Reservation reservations = new Reservation(
+                    reservation.getRes_id(),
+                    reservation.getDate(),
+                    reservation.getStatus(),
+                    student,
+                    room
+            );
+
+            student.getReservations().add(reservations);
+            room.getReservations().add(reservations);
+            room.setQty(room.getQty() - 1);
+
+            // Persist Student and Update Room
+            boolean isRegistered = studentDAO.add(student);
+            roomDAO.update(room);
+
+            transaction.commit();
+            return isRegistered;
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            throw new Exception("Error during registration: " + e.getMessage(), e);
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+    }
 
     @Override
     public List<RoomDTO> getAllRooms() throws Exception {
